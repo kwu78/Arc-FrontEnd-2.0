@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import GoogleLogin from 'react-google-login';
 
 import {useHistory} from "react-router-dom";
 // import Box from "@material-ui/core/Box";
@@ -13,7 +14,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import Link from "@material-ui/core/Link";
 import { Button,Form,Card } from 'react-bootstrap';
 import { makeStyles } from "@material-ui/core/styles";
-import GoogleLogo from "./../Google.png";
+import GoogleLogo from "./../googlesign.png";
 
 // import Axios from "axios";
 // import { SessionContext, setSessionCookie } from "../components/UserContext";
@@ -89,7 +90,7 @@ async function Googlelogin(event){
     <p>Arc</p>
 
    <div className="loginCard" bg='light' >
-   <div className="loginCardbg"></div>
+  
     <form>
   <Form.Group className="mb-3 logingroup textfield" controlId="formBasicEmail">
   {/* <div class="alert alert-danger"><%= message %></div> */}
@@ -100,36 +101,40 @@ async function Googlelogin(event){
               <Form.Text style={{color:'red'}}>
           {errorMessage!=""?errorMessage:''}
           </Form.Text>
+          <div style={{marginBottom:"10%"}} className="link">
+                  <Link style={{fontSize:"1.2rem"}} onClick={handleClicked}>
+                    {isRegistered ? "New User? Register" : "Returning User? Login"}
+                  </Link>
+                </div>
     
     {/* <Form.Label className="loginsubtitle">Email address</Form.Label> */}
-    <Form.Control style={{borderRadius:"10px"}} id='username' className="logininput" size="lg" as='input' htmlSize='3' type="email" placeholder="Enter email" />
-    <Form.Text className="texto">
-      We'll never share your email with anyone else.
-    </Form.Text>
+    <TextField  id='username' size="Normal" className="logininput" type="email" placeholder="Enter email" />
+   
   </Form.Group>
 
   <Form.Group className="mb-3 logingroup textfield" controlId="formBasicPassword">
     {/* <Form.Label>Password</Form.Label> */}
-    <Form.Control style={{borderRadius:"10px"}} id='password' className="logininput" size="lg" as='input' type="password" placeholder="Password" />
+    <TextField id='password' className="logininput" as='input' type="password" placeholder="Password" />
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicCheckbox">
-    <Form.Check type="checkbox" style={{color:"#1f5bca"}}label="Click this button to agree on the disclaimer" />
+  {!isRegistered?
+    <Form.Check type="checkbox" style={{color:"black"}} label="Click this button to agree on the disclaimer" />:<div></div>
+  }
+    {/* <Form.Check type="checkbox" style={{color:"black"}} label="Click this button to agree on the disclaimer" /> */}
     
   </Form.Group>
 
   <Form.Group style={{textAlign:'center'}} className="mb-3">
-  <Button onClick={Googlelogin} variant='light' size="lg" style={{padding:0, margin:"3%"}}>
-    <img src={GoogleLogo}></img>
+  <Button onClick={Googlelogin} className="loginbut" variant='light' size="lg" style={{textAlign:"left",padding:0,minWidth:'100%',position:'static'}}>
+    <img style={{height:'25px',width:"25px",marginRight:"24%",position:"relative"}} src={GoogleLogo}></img>
+    <span className="buttonText">Sign in with Google</span>
   </Button>
+
   <div style={{textAlign:'center',minWidth:'100%'}}>
-  <Button  onClick={login} style={{fontSize:"1.5rem",minWidth:'70%'}} id="test" variant="primary" type="submit" size="lg">
+  <Button  onClick={login} style={{fontSize:"1.5rem",minWidth:'100%'}} id="test" className="loginbut" variant="primary" type="submit" size="lg">
   {isRegistered ? "Log In" : "Register"}
   </Button>
-  <div className="link">
-                  <Link style={{fontSize:"1.2rem"}} onClick={handleClicked}>
-                    {isRegistered ? "Register" : "Login"}
-                  </Link>
-                </div>
+
   </div>
   </Form.Group>
 </form>

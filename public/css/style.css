@@ -609,7 +609,7 @@ label {
   }
 }
 .bglogin{
-  background-image:url('./../img/diving.jpg') ;
+  background-image:url('./../img/04-large.jpg') ;
   opacity:0.8;
   z-index:-2;
   position:absolute;
@@ -626,23 +626,23 @@ label {
   height:auto;
   }
   .logintitle{
-    padding-bottom:8%;
-    color:#1f5bca;
-    text-align: center;
+    color:#19161a;
+    text-align: left;
     font-size: 3.5rem;
   }
   .loginCard{
-    margin:10% 31%;
-    padding:5% 8%;
-    border-radius: 25px;
+    margin:4% 21% 20% 50%;
+    padding:5% 5%;
+    width:34%;
+  
+    background-color: white;
     position: relative;
   }
   .loginCardbg::before{
     content:"";
     background-size:cover;
     background-color: white;
-    border-radius: 25px;
-    opacity:0.6;
+    opacity:0.95;
   z-index:-1;
 
   position:absolute;
@@ -653,29 +653,30 @@ label {
 
   right: 0;
   }
+  .loginbut{
+    border-color: transparent;
+    box-shadow: 0px 16px 60px rgba(78, 79, 114, 0.08);
+  position: relative;
+  margin: 20px auto 0px;
+  }
   .wrapper{
     width: 100%;
     min-height: 100%;
   }
 .logingroup{
   padding: 2% 0;
-  border-radius:25px ;
 }
 .logininput{
   height: 5%;
-  font-size:1.3rem;
+  font-size:3rem;
+  width:100%;
 }
-.logingroup{
-  border-radius: 13px;
-}
-
 .texto{
   font-size: 2rem;
-  border-radius: 13px;
 }
-
-#test{
-  border-radius: 15px;
+.buttonText {
+  color: #4285f4;
+  font-weight: bolder;
 }
 .pages-name{
   font-size: 1.5rem;
@@ -693,7 +694,6 @@ label {
 
   
   right: 20px;
-  
   
   position: fixed;
 };
