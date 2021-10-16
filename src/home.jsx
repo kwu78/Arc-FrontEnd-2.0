@@ -11,7 +11,7 @@ import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
 import Navigation from "./components/navigate";
 import Add from "./components/add";
-
+import Axios from "axios";
 
 import "./App.css";
 
@@ -23,15 +23,25 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 
 const Home = () => {
   const [landingPageData, setLandingPageData] = useState({});
+  const [isLoggedIn, setLoggedIn]=useState(false);
+  const [loggedInUser,setLoggedInUser]=useState('');
   useEffect(() => {
     setLandingPageData(JsonData);
   }, []);
- 
-  return (
+  useEffect(()=>{
+    Axios.get("/api/login").then((response)=>{
+      if(response.data.loggedIn==true){
+        console.log(response.data.user);
+        setLoggedIn(true);
+        setLoggedInUser(response.data.user.username);
+      };
+    })
+  },[]);
 
+  return (
     <div>
       {/* <Navigation /> */}
-      <Navigation />
+      <Navigation user={loggedInUser} loggedIn={isLoggedIn}/>
       <Gallery data={landingPageData.Gallery}/>
       <Add />
       

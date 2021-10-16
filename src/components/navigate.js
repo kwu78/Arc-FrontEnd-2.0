@@ -1,9 +1,15 @@
 
+import { AutoFixOffSharp, Logout } from '@mui/icons-material';
 import {Container, Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
+import Axios from "axios";
 
-
-function navigate() {
-
+function navigate(props) {
+console.log(props.user);
+console.log(props.loggedIn)
+function Logout(){
+  props.loggedIn=false;
+  Axios.get('/api/logout');
+}
  return (
     
   <Navbar bg="dark" expand="lg" variant="dark" style={{margin:0}}>
@@ -15,7 +21,13 @@ function navigate() {
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="pages-name">
         <Nav.Link href="/">Home</Nav.Link>
+        {props.loggedIn?
+          <Nav.Link onClick={Logout} href="/">Logout</Nav.Link>
+        :
         <Nav.Link href="/login">Login</Nav.Link>
+        }
+        
+      
         
       </Nav>
       <Form className="search-all d-flex">

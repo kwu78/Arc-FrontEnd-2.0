@@ -26,7 +26,7 @@ function Login() {
   var UserisRegistered = false;
   const [isRegistered, setRegisterState] = useState(true);
   const history=useHistory();
-  const [loggedInUser,setLoggedInUser]=useState(false);
+  const [loggedInUser,setLoggedInUser]=useState('');
   const [UserName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   // console.log(loginMessage);

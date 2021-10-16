@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState,useEffect, useContext } from "react";
 import {Modal,FloatingLabel,Form,Row,Col,ToggleButton,ButtonGroup} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import Axios from "axios";
@@ -6,11 +6,23 @@ import {useHistory} from "react-router-dom";
 function AddPost(props){
   const [artType,setartType]=useState('artwork');
   const [photoURL,setPhotoURL]=useState(null);
+  const [isLoggedIn, setLoggedIn]=useState(false);
+  const [loggedInUser,setLoggedInUser]=useState('');
   const history=useHistory();
+  useEffect(()=>{
+    Axios.get("/api/login").then((response)=>{
+      if(response.data.loggedIn==true){
+        console.log(response.data.user);
+        setLoggedIn(true);
+        setLoggedInUser(response.data.user);
+      };
+    })
+  },[]);
   const type=[
     {id:'1',value:'artwork'},
     {id:'2',value:'photography'}
   ]
+
   function uploadImage(e){
     setPhotoURL(URL.createObjectURL(e.target.files[0]));
   }
@@ -20,7 +32,8 @@ function AddPost(props){
       title:document.getElementById('photoID').value,
       description:document.getElementById('description').value,
       artType:artType,
-      photoURL:photoURL
+      photoURL:photoURL,
+      userinfo:loggedInUser
     }
     console.log(post);
     Axios.post('/posts',post).then(function(response){
