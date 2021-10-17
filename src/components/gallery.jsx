@@ -11,11 +11,17 @@ export function Gallery(props){
     <div id='portfolio' className='text-center'>
       <div className='container'>
         <div className='section-title'>
-          <h2>Gallery</h2>
+        <p1>
+          GALLERY
+          </p1>
+          <br></br>
+          <br></br>
+          <br></br>
           <p>
           To help an artist gather and give genuine critique anonymously from other artists<br></br>in order to replenish creativity and create better art
           </p>
         </div>
+        
         <div className='row'>
         <div className='portfolio-items'>
             {props.data

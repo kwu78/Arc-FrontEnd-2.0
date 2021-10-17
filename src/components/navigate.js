@@ -1,7 +1,18 @@
 
+import * as React from 'react';
 import { AutoFixOffSharp, Logout } from '@mui/icons-material';
 import {Container, Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
 import Axios from "axios";
+
+
+const style = {
+    margin: 0,
+    top: 0,
+    right: 0,
+    bottom: 'auto',
+    left: 0,
+    position: 'fixed',
+  }
 
 function navigate(props) {
 console.log(props.user);
@@ -12,8 +23,9 @@ function Logout(){
 }
  return (
     
-  <Navbar bg="dark" expand="lg" variant="dark" style={{margin:0}}>
-  <Container>
+  <Navbar style = {style} bg="dark" expand="lg" variant="dark" 
+    >
+  <Container >
     <Navbar.Brand className="bartitle" href="/">
       <img src="img/logowhite.png" width='35' height='35' style={{marginTop:"20%"}}/>
       </Navbar.Brand>
@@ -25,11 +37,12 @@ function Logout(){
           <Nav.Link onClick={Logout} href="/">Logout</Nav.Link>
         :
         <Nav.Link href="/login">Login</Nav.Link>
-        }
         
-      
+        } 
+        
         
       </Nav>
+        
       <Form className="search-all d-flex">
       <FormControl
         style={{fontSize:"1.5rem", marginRight:"2%", marginTop:"7%"}}
@@ -39,7 +52,8 @@ function Logout(){
         aria-label="Search"
       />
       <Button variant="outline-light" style={{marginTop:"7%"}}>Search</Button>
-    </Form>
+      </Form>
+    
     </Navbar.Collapse>
     
   </Container>

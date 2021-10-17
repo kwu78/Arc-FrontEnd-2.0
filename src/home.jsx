@@ -11,9 +11,11 @@ import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
 import Navigation from "./components/navigate";
 import Add from "./components/add";
+import Drawer from "./components/drawer";
 import Axios from "axios";
 
 import "./App.css";
+
 
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
@@ -44,6 +46,8 @@ const Home = () => {
       <Navigation user={loggedInUser} loggedIn={isLoggedIn}/>
       <Gallery data={landingPageData.Gallery}/>
       <Add />
+      <Drawer />
+      
       
     </div>
     
