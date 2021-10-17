@@ -4,8 +4,7 @@ export const Image = ({ title, largeImage, smallImage }) => {
       <div className='hover-bg'>
         {' '}
         <a
-          href="/login"  
-          
+          href="/login"           
         >
           <div className='hover-text'>
             <h4>{title}</h4>

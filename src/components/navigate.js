@@ -11,6 +11,7 @@ const style = {
     right: 0,
     bottom: 'auto',
     left: 0,
+    zIndex: 2,
     position: 'fixed',
   }
 
@@ -18,7 +19,7 @@ function navigate(props) {
 console.log(props.user);
 console.log(props.loggedIn)
 function Logout(){
-  props.loggedIn=false;
+  // props.loggedIn=false;
   Axios.get('/api/logout');
 }
  return (
@@ -37,10 +38,8 @@ function Logout(){
           <Nav.Link onClick={Logout} href="/">Logout</Nav.Link>
         :
         <Nav.Link href="/login">Login</Nav.Link>
-        
         } 
-        
-        
+               
       </Nav>
         
       <Form className="search-all d-flex">

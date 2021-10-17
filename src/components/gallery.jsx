@@ -1,8 +1,18 @@
 import { Image } from "./image";
-import plus from './../plus.png';
 import {Button} from 'react-bootstrap';
 import React, { useState, useContext } from "react";
 import AddPost from './addPost';
+import Layout from "react-photo-gallery";
+import { photos } from "./photos";
+
+function columns(containerWidth) {
+  let columns = 1;
+  if (containerWidth >= 500) columns = 2;
+  if (containerWidth >= 900) columns = 3;
+  if (containerWidth >= 1500) columns = 4;
+  return columns;
+}
+
 
 export function Gallery(props){
   const [addState,setAddState]=useState(false);
@@ -33,6 +43,10 @@ export function Gallery(props){
               : 'Loading...'}
           </div>
         </div>
+
+        <div>
+    <Layout photos={photos} columns={columns} direction="column" />
+    </div>
         
       </div>
       
