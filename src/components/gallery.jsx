@@ -57,7 +57,7 @@ export function Gallery(props){
         </div>
 
         <div>
-    <Layout photos={photos} columns={columns} direction="column" />
+    {/* <Layout photos={photos} columns={columns} direction="column" /> */}
     </div>
         
       </div>
