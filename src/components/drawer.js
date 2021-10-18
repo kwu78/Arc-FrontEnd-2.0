@@ -14,11 +14,12 @@ import { Typography } from '@mui/material';
 
 const style = {
     margin: 0,
-    top: 70,
+    top: 35,
     right: 20,
     bottom: 'auto',
     left: 'auto',
     position: 'fixed', 
+    zIndex: 2,
 };
 
 
@@ -43,7 +44,7 @@ export default function TemporaryDrawer() {
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
-      paddingBottom="632"
+      paddingBottom="700"
       paddingTop="50"
     >
     <List >
@@ -67,7 +68,7 @@ export default function TemporaryDrawer() {
     <div>
         
         <React.Fragment>
-         <Fab  size="small"  style={style} onClick={toggleDrawer(true)}>
+         <Fab  size="md"  style={style} onClick={toggleDrawer(true)}>
          <MenuIcon />
          </Fab>
          

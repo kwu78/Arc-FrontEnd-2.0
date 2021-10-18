@@ -11,7 +11,7 @@ const style = {
     right: 0,
     bottom: 'auto',
     left: 0,
-    zIndex: 2,
+    zIndex: 1,
     position: 'fixed',
   }
 
@@ -19,7 +19,7 @@ function navigate(props) {
 console.log(props.user);
 console.log(props.loggedIn)
 function Logout(){
-  // props.loggedIn=false;
+  
   Axios.get('/api/logout');
 }
  return (
