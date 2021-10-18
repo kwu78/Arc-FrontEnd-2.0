@@ -10,6 +10,7 @@ export const Image = ({ title, largeImage, smallImage }) => {
             <h4>{title}</h4>
           </div>
           <img
+            style={{minWidth:"100%", height:"400px"}}
             src={smallImage}
             className='img-responsive'
             alt={title}
