@@ -3,7 +3,7 @@ import {Modal,FloatingLabel,Form,Row,Col,ToggleButton,ButtonGroup} from 'react-b
 import {Button} from 'react-bootstrap';
 import Axios from "axios";
 import {useHistory} from "react-router-dom";
-import { FilePond, File, registerPlugin } from 'react-filepond'
+import { FilePond, File, registerPlugin,Create } from 'react-filepond'
 import 'filepond/dist/filepond.min.css'
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
@@ -34,18 +34,25 @@ function AddPost(props){
     setPhotoURL(URL.createObjectURL(e.target.files[0]));
   }
   function upload(){
+  //  console.log(FilePond.parse(files[0]));
+   console.log(loggedInUser._id);
+   console.log(files);
+   console.log((document.getElementsByName("files")));
+  //  const pond= Create(files,{
+  //    maxFiles:1,
+  //    allowBrowse:false
+  //  })
    
     let post={
       title:document.getElementById('photoID').value,
       description:document.getElementById('description').value,
       artType:artType,
       photoURL:photoURL,
-      userinfo:loggedInUser
+      userinfo:loggedInUser._id
     }
     console.log(post);
     Axios.post('/posts',post).then(function(response){
       console.log(response);
-      
     });
     props.onHide();
     history.push("/");
@@ -114,7 +121,7 @@ function AddPost(props){
         onupdatefiles={setFiles}
         allowMultiple={true}
         maxFiles={3}
-        server="/api"
+        server="/posts"
         name="files"
         labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
       />
