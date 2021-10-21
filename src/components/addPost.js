@@ -3,11 +3,18 @@ import {Modal,FloatingLabel,Form,Row,Col,ToggleButton,ButtonGroup} from 'react-b
 import {Button} from 'react-bootstrap';
 import Axios from "axios";
 import {useHistory} from "react-router-dom";
+import { FilePond, File, registerPlugin } from 'react-filepond'
+import 'filepond/dist/filepond.min.css'
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 function AddPost(props){
   const [artType,setartType]=useState('artwork');
   const [photoURL,setPhotoURL]=useState(null);
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
+  const [files, setFiles] = useState([]);
   const history=useHistory();
   useEffect(()=>{
     Axios.get("/api/login").then((response)=>{
@@ -102,6 +109,15 @@ function AddPost(props){
           </ButtonGroup>
     <Form.Group>
     <input type="file" id='uploadedWork' className="form-control" onChange={uploadImage} />
+    <FilePond
+        files={files}
+        onupdatefiles={setFiles}
+        allowMultiple={true}
+        maxFiles={3}
+        server="/api"
+        name="files"
+        labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+      />
     </Form.Group>
   </fieldset>
       </Modal.Body>
