@@ -3,6 +3,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { useState, useContext } from "react";
 import AddPost from './addPost';
+import Comment from "./comment";
 
 const style = {
     margin: 0,

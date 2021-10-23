@@ -1,14 +1,15 @@
-import { propTypes } from "react-bootstrap/esm/Image"
-
-export const Image = ({ title, largeImage, smallImage, loggedIn }) => {
+import { propTypes } from "react-bootstrap/esm/Image";
+import Comment from "./comment";
+export const Image = ({ title, largeImage, smallImage, loggedIn}) => {
   return (
     <div className='portfolio-item'>
       <div className='hover-bg'>
         {' '}
       {loggedIn?
         <a
+         
+         href="#myModal"
           
-          href={largeImage} 
           title={title}
           data-lightbox-gallery='gallery1'          
         >

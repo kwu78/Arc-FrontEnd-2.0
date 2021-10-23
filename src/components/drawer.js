@@ -44,7 +44,7 @@ export default function TemporaryDrawer() {
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
-      paddingBottom="700"
+      paddingBottom="1600"
       paddingTop="50"
     >
     <List >
