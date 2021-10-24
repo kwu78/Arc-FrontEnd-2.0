@@ -9,6 +9,7 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
+import { file } from "@babel/types";
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview,FilePondPluginFileEncode)
 function AddPost(props){
   const [artType,setartType]=useState('artwork');
@@ -16,6 +17,7 @@ function AddPost(props){
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
   const [files, setFiles] = useState([]);
+
   const[clicked,setClicked]=useState(false);
   const history=useHistory();
   useEffect(()=>{
@@ -50,6 +52,8 @@ function AddPost(props){
       description:document.getElementById('description').value,
       artType:artType,
       photoURL:photoURL,
+      image:files[0].getFileEncodeBase64String(),
+      imageType:files[0].fileType,
       userinfo:loggedInUser._id
     }
     console.log(post);
@@ -100,25 +104,7 @@ function AddPost(props){
           id="photography"
         />
     </Form.Group>
-    <ButtonGroup className="mb-2">
-    {type.map((choice) => (
-    <ToggleButton
-            key={choice.id}
-            id={`radio-${choice.id}`}
-            type="radio"
-            variant='outline-primary'
-            name="artType"
-  
-            value={choice.value}
-            checked={artType === choice.value}
-            onChange={(e) => setartType(e.currentTarget.value)}
-          >
-            {choice.value}
-          </ToggleButton>
-          ))}
-          </ButtonGroup>
     <Form.Group>
-    <input type="file" id='uploadedWork' className="form-control" onChange={uploadImage} />
     <FilePond
         files={files}
         onupdatefiles={setFiles}
@@ -157,9 +143,10 @@ function AddPost(props){
                 }
             };
             console.log(formData);
-            request.send(formData);
-
-            // Should expose an abort method so the request can be cancelled
+            request.send(file);
+            console.log(files[0]);
+            console.log(files[0]["fileType"]);
+            // Should expose an abort method so  the request can be cancelled
             return {
                 abort: () => {
                     // This function is entered if the user has tapped the cancel button
@@ -173,6 +160,7 @@ function AddPost(props){
           load:"./upload",
           fetch:'./upload'
         }}
+        // server="http://localhost:9999/posts/tmp"
         maxFiles={3}
         name="files"
         labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
