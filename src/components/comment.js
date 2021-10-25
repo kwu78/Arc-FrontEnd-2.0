@@ -27,16 +27,18 @@ function Comment() {
       </Modal.Header>
       <Figure>
         <Figure.Image
-          width={171}
-          height={180}
+          width={400}
+          height={300}
           alt="171x180"
           src="img/portfolio/05-large.jpg"
         />
-        <Figure.Caption>
-          Description: Nulla vitae elit libero, a pharetra augue mollis interdum.
+        <Figure.Caption className='post-describe'>
+        <h4>
+          Description <br></br> Village, nature, watercolor
+          </h4>
         </Figure.Caption>
       </Figure>
-      <div>
+      <div className='toggle-like'>
       <Button variant="secondary" onClick={handleClicked}>
         {isLiked? "Unlike":"Like"}
       </Button>
@@ -46,7 +48,7 @@ function Comment() {
     <Form.Label>Comment</Form.Label>
     <Form.Control  />
       </Form.Group>
-      <Button variant="secondary" type="submit">
+      <Button style={{marginLeft:"90%"}} variant="secondary" type="submit">
           Comment
         </Button>
      </Form>

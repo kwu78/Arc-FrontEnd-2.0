@@ -41,7 +41,7 @@ const Home = ({children}) => {
       <Gallery data={landingPageData.Gallery}/>
       <Add />
       <Drawer />
-      <Comment />
+      {/* <Comment /> */}
     </div>
     
   );
