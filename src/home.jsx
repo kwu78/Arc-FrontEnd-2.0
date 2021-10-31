@@ -9,9 +9,6 @@ import Drawer from "./components/drawer";
 import Comment from "./components/comment";
 import Axios from "axios";
 
-
-
-
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
   speedAsDuration: true,
@@ -21,6 +18,11 @@ const Home = ({children}) => {
   const [landingPageData, setLandingPageData] = useState({});
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
+  useEffect(() => {
+    Axios.post("/all",3).then((response)=>{
+      setLandingPageData(response);
+    })
+  }, []);
   useEffect(() => {
     setLandingPageData(JsonData);
   }, []);

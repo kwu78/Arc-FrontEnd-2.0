@@ -8,9 +8,11 @@ import 'filepond/dist/filepond.min.css'
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
+import FilePondPluginImageResize from 'filepond-plugin-image-resize';
+
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import { file } from "@babel/types";
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview,FilePondPluginFileEncode)
+registerPlugin(FilePondPluginImageExifOrientation,FilePondPluginImageResize, FilePondPluginImagePreview,FilePondPluginFileEncode)
 function AddPost(props){
   const [artType,setartType]=useState('artwork');
   const [photoURL,setPhotoURL]=useState(null);
@@ -126,7 +128,7 @@ function AddPost(props){
             request.open('POST', '/posts/temp');
             console.log(request);
             console.log(fieldName);
-            console.log(file);
+            console.log(files);
             // Should call the progress method to update the progress to 100% before calling load
             // Setting computable to false switches the loading indicator to infinite mode
             request.upload.onprogress = (e) => {
