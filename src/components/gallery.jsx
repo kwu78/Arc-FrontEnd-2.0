@@ -28,6 +28,7 @@ export function Gallery(props){
       };
     })
   },[]);
+  console.log(props.image.postimage)
   return (
     <div>
     <div id='portfolio' className='text-center'>
@@ -53,6 +54,7 @@ export function Gallery(props){
                 </div>
               ))
               : 'Loading...'}
+            <img src={"data:image/png;base64, "+props.image.postimage}></img>
           </div>
         </div>
 

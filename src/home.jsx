@@ -16,11 +16,19 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 
 const Home = ({children}) => {
   const [landingPageData, setLandingPageData] = useState({});
+  const[sentImage,setSentImage]=useState([]);
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
   useEffect(() => {
-    Axios.post("/all",3).then((response)=>{
-      setLandingPageData(response);
+    Axios.post("posts/all",3).then((response)=>{
+      let image={
+        postid:response.data[0]._id,
+        postimage:response.data[0].image
+      
+      }
+      setSentImage(image);
+      console.log(image);
+      console.log(response);
     })
   }, []);
   useEffect(() => {
@@ -40,7 +48,7 @@ const Home = ({children}) => {
   return (
     <div>
       <Navigation user={loggedInUser} loggedIn={isLoggedIn}/>
-      <Gallery data={landingPageData.Gallery}/>
+      <Gallery image={sentImage} data={landingPageData.Gallery}/>
       <Add />
       <Drawer />
       <Comment />
