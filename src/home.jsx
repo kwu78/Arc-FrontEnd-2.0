@@ -52,7 +52,7 @@ const Home = ({children}) => {
       <Gallery image={sentImage} data={landingPageData.Gallery}/>
       <Add />
       <Drawer />
-      <Comment />
+      {/* <Comment /> */}
     </div>
     
   );
