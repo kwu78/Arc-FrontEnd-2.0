@@ -8,9 +8,11 @@ import 'filepond/dist/filepond.min.css'
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
+import FilePondPluginImageResize from 'filepond-plugin-image-resize';
+
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import { file } from "@babel/types";
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview,FilePondPluginFileEncode)
+registerPlugin(FilePondPluginImageExifOrientation,FilePondPluginImageResize, FilePondPluginImagePreview,FilePondPluginFileEncode)
 function AddPost(props){
   const [artType,setartType]=useState('artwork');
   const [photoURL,setPhotoURL]=useState(null);
@@ -90,20 +92,23 @@ function AddPost(props){
     />
   </FloatingLabel>
   <fieldset>
-    <Form.Group as={Row} className="mb-3">
-        <Form.Check
-          type="radio"
-          label="Upload an Artwork"
-          name="artwork"
-          id="artwork"
-        />
-        <Form.Check
-          type="radio"
-          label="Upload a Photography"
-          name="photography"
-          id="photography"
-        />
-    </Form.Group>
+    <ButtonGroup style={{paddingTop:"2%"}} className="mb-2">
+    {type.map((choice) => (
+    <ToggleButton
+            key={choice.id}
+            id={`radio-${choice.id}`}
+            type="radio"
+            variant='outline-primary'
+            name="artType"
+  
+            value={choice.value}
+            checked={artType === choice.value}
+            onChange={(e) => setartType(e.currentTarget.value)}
+          >
+            {choice.value}
+          </ToggleButton>
+          ))}
+          </ButtonGroup>
     <Form.Group>
     <FilePond
         files={files}
@@ -123,7 +128,7 @@ function AddPost(props){
             request.open('POST', '/posts/temp');
             console.log(request);
             console.log(fieldName);
-            console.log(file);
+            console.log(files);
             // Should call the progress method to update the progress to 100% before calling load
             // Setting computable to false switches the loading indicator to infinite mode
             request.upload.onprogress = (e) => {

@@ -47,4 +47,18 @@ export const photos = [
       height: 3
     }
   ];
-  
+// export const photos =(props) =>{
+//   console.log(props.data);
+//   return(
+//     [
+//       {
+//         src: props.data,
+//         width: 4,
+//         height: 3,
+//         href: "/login"         
+      
+//       }
+//     ]
+//   )
+
+// }
