@@ -49,7 +49,7 @@ const Home = ({children}) => {
   return (
     <div>
       <Navigation user={loggedInUser} loggedIn={isLoggedIn}/>
-      <Gallery image={sentImage} data={landingPageData.Gallery}/>
+      <Gallery image={sentImage} data={landingPageData.Gallery} loggedIn={isLoggedIn}/>
       <Add />
       <Drawer />
       {/* <Comment /> */}

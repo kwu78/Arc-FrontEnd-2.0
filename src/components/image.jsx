@@ -8,7 +8,6 @@ export const Image = ({ title, largeImage, smallImage, loggedIn}) => {
       {loggedIn?
         <a
          
-         href="#myModal"
           
           title={title}
           data-lightbox-gallery='gallery1'          

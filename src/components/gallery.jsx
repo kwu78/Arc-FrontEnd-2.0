@@ -1,8 +1,8 @@
 import { Image } from "./image";
 import {Button} from 'react-bootstrap';
 import React, { useState, useContext, useEffect } from "react";
-import AddPost from './addPost';
 import Layout from "react-photo-gallery";
+import Comment from "./comment";
 
 import Axios from "axios";
 
@@ -16,9 +16,16 @@ function columns(containerWidth) {
 
 
 export function Gallery(props){
-  const [addState,setAddState]=useState(false);
+  const [commentState,setCommentState]=useState(false);
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
+  
+  function handleClick (e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+    setCommentState(true);
+    console.log(commentState);
+  };
   useEffect(()=>{
     Axios.get("/api/login").then((response)=>{
       if(response.data.loggedIn==true){
@@ -60,7 +67,12 @@ export function Gallery(props){
             
            {props.image.map((entry) => (
              /*console.log(entry.image);*/
-            <img width="32%" src={"data:image/png;base64, "+entry.image}></img>
+             <div>
+             {props.loggedIn? <a onClick={handleClick} ><img width="32%" src={"data:image/png;base64, "+entry.image}></img></a>:
+             <a href='/login'><img width="32%" src={"data:image/png;base64, "+entry.image}></img></a>}
+             {/* <Comment show={commentState} src={"data:image/png;base64, "+entry.image}
+                         onHide={()=>setCommentState(false)}/> */}
+            </div>
            ))
            }
             {/* <img width="32%" src={"data:image/png;base64, "+props.image[0].image}></img> */}
@@ -75,8 +87,9 @@ export function Gallery(props){
       
       
     </div>
-    <AddPost show={addState} 
-          onHide={()=>setAddState(false)}/>
+    <Comment show={commentState} 
+                         onHide={()=>setCommentState(false)}/>
+       
     </div>
     
   )
