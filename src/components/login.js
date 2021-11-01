@@ -79,8 +79,10 @@ async function Googlelogin(event){
       if (response.data.status=='error'){
         setErrMessage(response.data.error);
         setRegisterState(true);
+        history.push("/");
       }
     });
+    
   }
   }
   return (

@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap';
 import React, { useState, useContext, useEffect } from "react";
 import AddPost from './addPost';
 import Layout from "react-photo-gallery";
-import { photos } from "./photos";
+
 import Axios from "axios";
 
 function columns(containerWidth) {
