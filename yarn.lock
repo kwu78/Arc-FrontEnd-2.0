@@ -5470,6 +5470,11 @@
   "resolved" "https://registry.npmjs.org/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz"
   "version" "1.0.0"
 
+"filepond-plugin-file-encode@^2.1.10":
+  "integrity" "sha512-SCz6Pvu/30WV2knw+zMuJ4bB+vBE7niMg2Vte3NXY9K5qfBpX0Ido35PKUrxLatSMeWiwVakhwindt2n591jJw=="
+  "resolved" "https://registry.npmjs.org/filepond-plugin-file-encode/-/filepond-plugin-file-encode-2.1.10.tgz"
+  "version" "2.1.10"
+
 "filepond-plugin-image-exif-orientation@^1.0.11":
   "integrity" "sha512-hLBc12Fk6Zkj3L8mSAn+elugHOqT5rLUbgVXQQIQjMe0FsGjtpoxqeVR6jt4IWHGat2L9sFAgU2TGmd1mqosCg=="
   "resolved" "https://registry.npmjs.org/filepond-plugin-image-exif-orientation/-/filepond-plugin-image-exif-orientation-1.0.11.tgz"
