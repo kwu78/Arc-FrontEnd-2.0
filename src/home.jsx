@@ -21,13 +21,14 @@ const Home = ({children}) => {
   const [loggedInUser,setLoggedInUser]=useState('');
   useEffect(() => {
     Axios.post("posts/all",3).then((response)=>{
+
       let image={
         postid:response.data[0]._id,
         postimage:response.data[0].image
       
       }
-      setSentImage(image);
-      console.log(image);
+      setSentImage(response.data);
+      console.log(sentImage);
       console.log(response);
     })
   }, []);

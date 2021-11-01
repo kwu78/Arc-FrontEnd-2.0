@@ -28,7 +28,9 @@ export function Gallery(props){
       };
     })
   },[]);
-  console.log(props.image.postimage)
+  if(props.image.length != 0){console.log(props.image[0])}
+  
+  if(props.image.length != 0){
   return (
     <div>
     <div id='portfolio' className='text-center'>
@@ -53,13 +55,20 @@ export function Gallery(props){
                   <Image title={d.title} largeImage={d.largeImage} smallImage={d.smallImage} loggedIn={isLoggedIn} />
                 </div>
               ))
-              : 'Loading...'}
-            <img src={"data:image/png;base64, "+props.image.postimage}></img>
+              : 'Loading...'
+            }
+            
+           {props.image.map((entry) => (
+             /*console.log(entry.image);*/
+            <img width="32%" src={"data:image/png;base64, "+entry.image}></img>
+           ))
+           }
+            {/* <img width="32%" src={"data:image/png;base64, "+props.image[0].image}></img> */}
           </div>
         </div>
 
         <div>
-    {/* <Layout photos={photos} columns={columns} direction="column" /> */}
+    {/* <Layout photos={photos} data={"data:image/png;base64, "+props.image.postimage} columns={columns} direction="column" /> */}
     </div>
         
       </div>
@@ -71,4 +80,7 @@ export function Gallery(props){
     </div>
     
   )
+          } else{
+            return <div>Hi</div>
+          }
 }
