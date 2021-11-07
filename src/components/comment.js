@@ -6,10 +6,7 @@ import Axios from "axios";
 import {useHistory} from "react-router-dom";
 
 function Comment(props) {
-  // const [show, setShow] = useState(false);
-
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+  
   const [isLiked, setLikeState] = useState(false);
   function handleClicked(){
     setLikeState(!isLiked);
@@ -17,9 +14,6 @@ function Comment(props) {
  
   return (
     <>
-    {/* <Button variant="primary" onClick={handleShow}>
-      Launch demo modal
-    </Button> */}
     
     <Modal {...props}  size="lg" animation={false}  centered >
       <Modal.Header closeButton>
@@ -30,12 +24,11 @@ function Comment(props) {
           width={400}
           height={300}
           alt="171x180"
-          src="img/portfolio/03-large.jpg"
-        />
-        
+          src={"data:image/png;base64, " + props.entry.image}
+        />        
         <Figure.Caption className='post-describe'>
         <h4>
-          Description <br></br> Village, nature, watercolor
+        {props.entry.title} <br></br> {props.entry.description}
           </h4>
         </Figure.Caption>
       </Figure>
