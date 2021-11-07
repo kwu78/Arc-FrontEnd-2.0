@@ -6,7 +6,6 @@ import SmoothScroll from "smooth-scroll";
 import Navigation from "./components/navigate";
 import Add from "./components/add";
 import Drawer from "./components/drawer";
-import Comment from "./components/comment";
 import Axios from "axios";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
@@ -25,6 +24,7 @@ const Home = ({children}) => {
       let image={
         postid:response.data[0]._id,
         postimage:response.data[0].image
+        
       
       }
       setSentImage(response.data);
@@ -49,10 +49,9 @@ const Home = ({children}) => {
   return (
     <div>
       <Navigation user={loggedInUser} loggedIn={isLoggedIn}/>
-      <Gallery image={sentImage} data={landingPageData.Gallery} loggedIn={isLoggedIn}/>
+      <Gallery image={sentImage} loggedIn={isLoggedIn}/>
       <Add />
       <Drawer />
-      {/* <Comment /> */}
     </div>
     
   );
