@@ -156,7 +156,6 @@ function AddPost(props){
                 abort: () => {
                     // This function is entered if the user has tapped the cancel button
                     request.abort();
-
                     // Let FilePond know the request has been cancelled
                     abort();
                 },

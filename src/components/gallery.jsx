@@ -50,20 +50,18 @@ export function Gallery(props) {
 
             <div>
             <ImageList variant="masonry" cols={3} gap={8}>
-                  {props.image.map((entry) => (
-                    
+                  {props.image.map((entry) => (                    
                     <ImageListItem key={entry.image}>
                       {props.loggedIn ? <a onClick={(e) => {clickMe(e, entry)}} ><img width="100%" src={"data:image/png;base64, " + entry.image}></img></a> :
                         <a href='/login'><img width="100%" src={"data:image/png;base64, " + entry.image}></img></a>}
                     </ImageListItem>
-
                   ))
                   }
                 </ImageList>
             </div>
           </div>
         </div>
-        <Comment show={commentState}
+        <Comment show={commentState} onShow={() => setCommentState(true)}
           onHide={() => setCommentState(false) } entry={sentEntry} />
 
       </div>
