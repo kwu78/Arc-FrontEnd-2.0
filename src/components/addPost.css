@@ -1,0 +1,105 @@
+
+.container: {
+    display: "flex";
+    flexDirection: "column";
+    justifyContent: "center";
+    alignItems: "center";
+    paddingTop: 50;
+  },
+.preview {
+    marginTop: 50;
+    display: "flex";
+    flexDirection: "column";
+  },
+.image: {
+    maxWidth: "100%";
+    maxHeight: 320;
+  },
+.delete: {
+    cursor: "pointer";
+    padding: 15;
+    background: "red";
+    color: "white";
+    border: "none";
+  },
+  .filepond--item {
+    width: calc(50% - 0.5em);
+},
+.filepond--root {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+        sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+},
+
+
+.topping {
+  margin-top: 0.3rem;
+  vertical-align: text-bottom;
+}
+.toppings-list {
+  width: 0%;
+  margin:0 left;
+  list-style: none;
+  padding: 0;
+}
+
+.toppings-list li {
+  margin-bottom: 0.5rem;
+}
+
+.toppings-list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toppings-list-item label {
+  vertical-align: text-bottom;
+  margin-left: 0.5rem;
+}
+/* underline color for "Browse" button */
+.filepond--label-action {
+    text-decoration-color: #aaa;
+}
+
+/* the background color of the filepond drop area */
+.filepond--panel-root {
+    background-color: #eee;
+}
+
+/* the border radius of the drop area */
+.filepond--panel-root {
+    border-radius: 0.5em;
+}
+
+/* the border radius of the file item */
+.filepond--item-panel {
+    border-radius: 0.5em;
+}
+
+/* the background color of the file and file panel (used when dropping an image) */
+.filepond--item-panel {
+    background-color: #555;
+}
+
+/* the background color of the drop circle */
+.filepond--drip-blob {
+    background-color: #999;
+}
+#descriptionbox {
+  border:none;
+}
+#description{
+  height: 50px;
+  border-radius: 0;
+  border: none;
+  border-width: 1.3px;
+  border-bottom: 1px;
+}
+#photoID{
+  border-radius: 0;
+  border: none;
+  border-width: 1.3px;
+  border-bottom: 1px;
+}
+#close{
+  display:left;
+}
