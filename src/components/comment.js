@@ -34,7 +34,7 @@ function Comment(props) {
       setCommentlist(response.data);
 
     })
-   },[]);
+   },[props.entry._id]);
   function handleClicked(){
     setLikeState(!isLiked);
   }
