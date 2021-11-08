@@ -15,7 +15,7 @@ export function Gallery(props) {
   const[sentEntry,setSentEntry]=useState([]);
 
   function clickMe(event, entry){
-    event.preventDefault();   
+    // event.preventDefault();   
     setCommentState(true);
     setSentEntry(entry);
 
