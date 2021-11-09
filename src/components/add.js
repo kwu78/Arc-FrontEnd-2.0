@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useState, useContext } from "react";
 import AddPost from './addPost';
 
+
 const style = {
     margin: 0,
     top: 'auto',
