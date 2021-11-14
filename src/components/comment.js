@@ -53,9 +53,12 @@ function Comment(props) {
     if(response.data.status=="error"){
       setErrMessage(response.data.error);
       console.log(response.data.error);
+    }else{
+      setErrMessage('');
     }
     console.log(response.data);
   });
+  
   
   e.preventDefault();
   // props.onHide();
@@ -139,7 +142,8 @@ function Comment(props) {
       </div> */}
  
       
-      <Modal.Footer>
+      
+ <Modal.Footer>
         
         <Button variant="secondary" onClick={props.onHide}>
           Close
