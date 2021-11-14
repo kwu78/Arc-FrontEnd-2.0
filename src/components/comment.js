@@ -63,15 +63,20 @@ function Comment(props) {
     console.log(response.data);
   });
 
-
   e.preventDefault();
   // props.onHide();
   //history.push("/");
 }
+
+function close(e){
+  props.onHide(e); 
+  setMessage('');
+  setErrMessage('');   
+};
   return (
     <>  
     <Modal {...props}  size="lg" animation={false}  centered >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton onClick={close}>
         <Modal.Title>Post Detail Page</Modal.Title>
       </Modal.Header>
       <Grid container spacing={2}>
@@ -152,7 +157,7 @@ function Comment(props) {
       
  <Modal.Footer>
         
-        <Button variant="secondary" onClick={props.onHide}>
+        <Button variant="secondary" onClick={close}>
           Close
         </Button>
       </Modal.Footer>
