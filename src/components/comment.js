@@ -9,7 +9,6 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-// import { Grid, Image } from 'semantic-ui-react'
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
@@ -91,7 +90,7 @@ function Comment(props) {
           <Form className='commentForm'>
       <Form.Group className="commentBox mb-3" >
     <Form.Control  
-    size="lg"
+      size="lg"
       id='comment'
       placeholder="Leave a comment here"
     />
