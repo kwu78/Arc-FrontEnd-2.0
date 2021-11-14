@@ -50,11 +50,11 @@ function Comment(props) {
     comment:document.getElementById('comment').value
   }
   Axios.post('/comments',comment).then(function(response){
-    if(response.status=="error"){
-      setErrMessage(response.error);
-      console.log(response.error);
+    if(response.data.status=="error"){
+      setErrMessage(response.data.error);
+      console.log(response.data.error);
     }
-    console.log(response);
+    console.log(response.data);
   });
   
   e.preventDefault();
@@ -97,6 +97,9 @@ function Comment(props) {
           Comment
         </Button>
      </Form>
+     <Form.Text style={{color:'red'}}>
+          {errorMessage!=""?errorMessage:''}
+          </Form.Text>
      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
     {props.entry.userinfo==loggedInUser && commentlist?
     commentlist.map((comment)=>(

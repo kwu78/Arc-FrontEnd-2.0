@@ -68,22 +68,26 @@ async function Googlelogin(event){
         if(response.data.status=="error"){
           console.log(response.data);
           console.log(response.data.error);
-         
           setErrMessage(response.data.error);
         }
         else{
           setLoggedInUser(response.data.user);
-        history.push("/");}
+          history.push("/");}
       })
     }
     else{
     Axios.post('/api/register',user).then(function(response){
       console.log(response);
       if (response.data.status=='error'){
+        console.log(response.data);
+        console.log(response.data.error);        
         setErrMessage(response.data.error);
+        // setRegisterState(true);
+      }else{
         setRegisterState(true);
+        history.push("/");
       }
-              history.push("/");
+
     });
   }
   }
