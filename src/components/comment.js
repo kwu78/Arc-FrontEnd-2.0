@@ -9,6 +9,8 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
+// import { Grid, Image } from 'semantic-ui-react'
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 function Comment(props) {
@@ -65,29 +67,46 @@ function Comment(props) {
       <Modal.Header closeButton>
         <Modal.Title>Post Detail Page</Modal.Title>
       </Modal.Header>
-      <Figure>
+      <Grid container spacing={2}>
+      <Grid  item xs={6} >
+    <Figure>
         <Figure.Image
-          width={400}
-          height={300}
+        style={{maxHeight:"500px",borderRadius:"20px",padding:'3%'}}
           alt="171x180"
           src={"data:image/png;base64, " + props.entry.image}
         />        
-        <Figure.Caption className='post-describe'>
-        <h4>
-        {props.entry.title} <br></br> {props.entry.description}
-          </h4>
-        </Figure.Caption>
       </Figure>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      </Grid>
+    <Grid item xs={6}>
+
+        <h1 className='titleText'>
+        {props.entry.title}  
+          </h1>
+          <h4 className='secondaryText'>
+          {props.entry.description}
+          </h4>
+          <Form className='commentForm'>
+      <Form.Group className="commentBox mb-3" >
+    <Form.Control  
+    size="lg"
+      id='comment'
+      placeholder="Leave a comment here"
+    />
+      </Form.Group>
+      <Button className='buttonText' onClick={comment} size="md" variant="secondary" type="submit">
+          Comment
+        </Button>
+     </Form>
+     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
     {props.entry.userinfo==loggedInUser && commentlist?
     commentlist.map((comment)=>(
       
-      <ListItem alignItems="flex-start">
+      <ListItem style={{paddingLeft:0}} alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
-          primary="anonymous user"
+          primary="anonymous user"r
           secondary={
             <React.Fragment>
               <Typography
@@ -107,24 +126,16 @@ function Comment(props) {
       :<div></div>
     }
     </List>
+    </Grid>
+  </Grid>
 
-      <div className='toggle-like'>
+      {/* <div className='toggle-like'>
       <Button variant="secondary" onClick={handleClicked}>
         {isLiked? "Unlike":"Like"}
       </Button>
-      </div>
-       <Form>
-      <Form.Group className="mb-3" >
-    <Form.Label>Comment</Form.Label>
-    <Form.Control  
-      id='comment'
-      placeholder="Leave a comment here"
-    />
-      </Form.Group>
-      <Button onClick={comment} style={{marginLeft:"90%"}} variant="secondary" type="submit">
-          Comment
-        </Button>
-     </Form>
+      </div> */}
+ 
+      
       <Modal.Footer>
         
         <Button variant="secondary" onClick={props.onHide}>
