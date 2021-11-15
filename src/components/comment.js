@@ -75,7 +75,8 @@ function close(e){
 };
   return (
     <>  
-    <Modal {...props}  size="lg" animation={false}  centered >
+    <Modal {...props}   size="lg" animation={false}  centered >
+     
       <Modal.Header closeButton onClick={close}>
         <Modal.Title>Post Detail Page</Modal.Title>
       </Modal.Header>
@@ -161,6 +162,7 @@ function close(e){
           Close
         </Button>
       </Modal.Footer>
+  
     </Modal>
    
   </>

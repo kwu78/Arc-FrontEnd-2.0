@@ -27,11 +27,7 @@ const Homemyposts = ({children}) => {
         setLoggedIn(true);
         setLoggedInUser(response.data.user);
         setLoggedInUserID(response.data.user._id);
-        // console.log(loggedInUser);
-        // console.log(loggedInUserID);
-
-        // let userId = loggedInUserID;
-        // console.log(userId);
+        
         let url = `/posts/myPosts?userId=${response.data.user._id}`;
         console.log(url);
         Axios.get(`${url}`)
@@ -42,12 +38,8 @@ const Homemyposts = ({children}) => {
             postimage:response.data['user posts search'].image       
           };
           setSentImage(response.data['user posts search']);
-          console.log(sentImage);
-          console.log(response);
-          console.log("myposts returned");
-    
-        });
-                
+     
+        });               
         }     
       
     });
@@ -55,10 +47,6 @@ const Homemyposts = ({children}) => {
    
   },[]);
 
-  
-
- 
-  
 
   return (
     <div>
