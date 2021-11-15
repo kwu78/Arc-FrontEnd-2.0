@@ -4,6 +4,7 @@ import { useState,useEffect, useContext } from "react";
 import { AutoFixOffSharp, Logout } from '@mui/icons-material';
 import {Container, Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
 import Axios from "axios";
+import {useHistory} from "react-router-dom";
 
 
 
@@ -22,25 +23,18 @@ function Navigate(props) {
 console.log(props.user);
 console.log(props.loggedIn)
 const[errorMessage,setErrMessage]=useState('');
+const history=useHistory();
 function Logout(){
   
   Axios.get('/api/logout');
 }
 function search(){
   
-  let search=document.getElementById('search').value;
-  console.log("searched");
-  Axios.post('/posts',search).then(function(response){
-    if(response.data.status=="error"){
-      setErrMessage(response.data.error);
-      console.log(response.data.error);
-    }else{
-      setErrMessage('');
-    }
-    console.log(response.data);
-  });
+  window.search=document.getElementById('search').value;
+  console.log(window.search);
+  history.push("/homesearch");
 
- 
+  
 }
  return (
     

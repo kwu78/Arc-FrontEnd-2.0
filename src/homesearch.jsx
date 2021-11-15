@@ -8,6 +8,7 @@ import Add from "./components/add";
 import Drawer from "./components/drawer";
 import Axios from "axios";
 
+
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
   speedAsDuration: true,
@@ -18,8 +19,18 @@ const Homesearch = ({children}) => {
   const[sentImage,setSentImage]=useState([]);
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
+  useEffect(()=>{
+    Axios.get("/api/login").then((response)=>{
+      if(response.data.loggedIn===true){
+        console.log(response.data.user);
+        setLoggedIn(true);
+        setLoggedInUser(response.data.user.username);
+      };
+    })
+  },[]);
+  console.log=window.search;
   useEffect(() => {
-    Axios.post("/fuzzy",3).then((response)=>{
+    Axios.post("/fuzzy", window.search).then((response)=>{
 
       let image={
         postid:response.data[0]._id,
@@ -35,15 +46,7 @@ const Homesearch = ({children}) => {
   useEffect(() => {
     setLandingPageData(JsonData);
   }, []);
-  useEffect(()=>{
-    Axios.get("/api/login").then((response)=>{
-      if(response.data.loggedIn===true){
-        console.log(response.data.user);
-        setLoggedIn(true);
-        setLoggedInUser(response.data.user.username);
-      };
-    })
-  },[]);
+  
 
 
   return (
