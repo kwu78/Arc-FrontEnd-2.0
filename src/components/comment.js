@@ -73,6 +73,7 @@ function close(e){
   setMessage('');
   setErrMessage('');   
 };
+console.log(commentlist);
   return (
     <>  
     <Modal {...props}   size="lg" animation={false}  centered >
@@ -119,7 +120,7 @@ function close(e){
      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
     {props.entry.userinfo==loggedInUser && commentlist?
     commentlist.map((comment)=>(
-      
+  
       <ListItem style={{paddingLeft:0}} alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
@@ -145,6 +146,31 @@ function close(e){
       :<div></div>
     }
     </List>
+    {/* <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    {commentlist.map((comment)=>{
+      (props.entry.userinfo==loggedInUser)?
+      <ListItem style={{paddingLeft:0}} alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="anonymous user"r
+          secondary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: 'inline' }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+              </Typography>
+              {comment.comment}
+            </React.Fragment>
+          }
+        />
+      </ListItem>:<div></div>
+    })}
+    </List> */}
     </Grid>
   </Grid>
 
