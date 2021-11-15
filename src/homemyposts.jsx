@@ -27,12 +27,13 @@ const Homemyposts = ({children}) => {
         setLoggedIn(true);
         setLoggedInUser(response.data.user);
         setLoggedInUserID(response.data.user._id);
-        console.log(loggedInUserID);
-        
-        let userId = loggedInUserID;
-        console.log(userId);
-        let url = `/posts/myPosts?userId=${userId}`
-      
+        // console.log(loggedInUser);
+        // console.log(loggedInUserID);
+
+        // let userId = loggedInUserID;
+        // console.log(userId);
+        let url = `/posts/myPosts?userId=${response.data.user._id}`;
+        console.log(url);
         Axios.get(`${url}`)
         .then((response)=>{
           console.log(response.data['user posts search']);
@@ -46,12 +47,12 @@ const Homemyposts = ({children}) => {
           console.log("myposts returned");
     
         });
+                
         }     
       
-    })
- 
-
+    });
     
+   
   },[]);
 
   
