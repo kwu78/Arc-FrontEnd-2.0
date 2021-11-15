@@ -1,8 +1,11 @@
 
 import * as React from 'react';
+import { useState,useEffect, useContext } from "react";
 import { AutoFixOffSharp, Logout } from '@mui/icons-material';
 import {Container, Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
 import Axios from "axios";
+import {useHistory} from "react-router-dom";
+
 
 
 const style = {
@@ -14,13 +17,23 @@ const style = {
     zIndex: 1,
     position: 'fixed',
   }
+  
 
-function navigate(props) {
+function Navigate(props) {
 console.log(props.user);
 console.log(props.loggedIn)
+const[errorMessage,setErrMessage]=useState('');
+const history=useHistory();
 function Logout(){
   
   Axios.get('/api/logout');
+}
+function search(){
+  
+  window.search=document.getElementById('search').value;
+  console.log(window.search);
+  props.setImage(window.search);
+  // history.push("/search");
 }
  return (
     
@@ -49,8 +62,9 @@ function Logout(){
         placeholder="Search"
         className="mr-2 search-box"
         aria-label="Search"
+        id='search'
       />
-      <Button variant="outline-light" style={{marginTop:"7%"}}>Search</Button>
+      <Button  variant="outline-light" onClick={search} style={{marginTop:"7%"}}>Search</Button>
       </Form>
     
     </Navbar.Collapse>
@@ -61,4 +75,4 @@ function Logout(){
  );
  }
 
-export default navigate;
+export default Navigate;

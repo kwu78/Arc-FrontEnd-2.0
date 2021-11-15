@@ -9,7 +9,9 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+
 
 function Comment(props) {
   console.log(props.entry._id);
@@ -17,6 +19,7 @@ function Comment(props) {
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
   const[errorMessage,setErrMessage]=useState('');
+  const[message,setMessage]=useState('');
   const[commentlist,setCommentlist]=useState([]);
   const history=useHistory();
   useEffect(()=>{
@@ -48,46 +51,81 @@ function Comment(props) {
     comment:document.getElementById('comment').value
   }
   Axios.post('/comments',comment).then(function(response){
-    if(response.status=="error"){
-      setErrMessage(response.error);
-      console.log(response.error);
+    if(response.data.status=="error"){
+      setMessage('');
+      setErrMessage(response.data.error);
+      console.log(response.data.error);
+    }else{
+      setMessage("Comment created successfully!");
+      setErrMessage('');
     }
-    console.log(response);
+    console.log(response.data);
+    
   });
 
   e.preventDefault();
   // props.onHide();
   //history.push("/");
 }
+
+function close(e){
+  props.onHide(e); 
+  setMessage('');
+  setErrMessage('');   
+};
   return (
-    <>
-    <Modal {...props}  size="lg" animation={false}  centered >
-      <Modal.Header closeButton>
+    <>  
+    <Modal {...props}   size="lg" animation={false}  centered >
+     
+      <Modal.Header closeButton onClick={close}>
         <Modal.Title>Post Detail Page</Modal.Title>
       </Modal.Header>
-      <Figure>
+      <Grid container spacing={2}>
+      <Grid  item xs={6} >
+    <Figure>
         <Figure.Image
-          width={400}
-          height={300}
+        style={{maxHeight:"500px",borderRadius:"20px",padding:'3%'}}
           alt="171x180"
           src={"data:image/png;base64, " + props.entry.image}
-        />
-        <Figure.Caption className='post-describe'>
-        <h4>
-        {props.entry.title} <br></br> {props.entry.description}
-          </h4>
-        </Figure.Caption>
+        />        
       </Figure>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      </Grid>
+    <Grid item xs={6}>
+
+        <h1 className='titleText'>
+        {props.entry.title}  
+          </h1>
+          <h4 className='secondaryText'>
+          {props.entry.description}
+          </h4>
+          <Form className='commentForm'>
+      <Form.Group className="commentBox mb-3" >
+    <Form.Control  
+      size="lg"
+      id='comment'
+      placeholder="Leave a comment here"
+    />
+      </Form.Group>
+      <Button className='buttonText' onClick={comment} size="md" variant="secondary" type="submit">
+          Comment
+        </Button>
+     </Form>
+     <Form.Text style={{color:'red'}}>
+          {errorMessage!=""?errorMessage:''}
+          </Form.Text>
+      <Form.Text style={{color:'green'}}>
+          {message!=""?message:''}
+          </Form.Text>
+     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
     {props.entry.userinfo==loggedInUser && commentlist?
     commentlist.map((comment)=>(
-
-      <ListItem alignItems="flex-start">
+      
+      <ListItem style={{paddingLeft:0}} alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
-          primary="anonymous user"
+          primary="anonymous user"r
           secondary={
             <React.Fragment>
               <Typography
@@ -102,37 +140,31 @@ function Comment(props) {
           }
         />
       </ListItem>
-
+      
     ))
       :<div></div>
     }
     </List>
+    </Grid>
+  </Grid>
 
-      <div className='toggle-like'>
+      {/* <div className='toggle-like'>
       <Button variant="secondary" onClick={handleClicked}>
         {isLiked? "Unlike":"Like"}
       </Button>
-      </div>
-       <Form>
-      <Form.Group className="mb-3" >
-    <Form.Label>Comment</Form.Label>
-    <Form.Control
-      id='comment'
-      placeholder="Leave a comment here"
-    />
-      </Form.Group>
-      <Button onClick={comment} style={{marginLeft:"90%"}} variant="secondary" type="submit">
-          Comment
-        </Button>
-     </Form>
-      <Modal.Footer>
-
-        <Button variant="secondary" onClick={props.onHide}>
+      </div> */}
+ 
+      
+      
+ <Modal.Footer>
+        
+        <Button variant="secondary" onClick={close}>
           Close
         </Button>
       </Modal.Footer>
+  
     </Modal>
-
+   
   </>
   )
 }

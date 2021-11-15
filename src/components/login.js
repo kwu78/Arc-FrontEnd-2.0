@@ -32,7 +32,10 @@ function Login() {
   // console.log(loginMessage);
   // const history = useHistory();
   // const { setSession } = useContext(SessionContext);
-  function handleClicked(){
+  function handleClicked(e){
+    e.preventDefault();
+    console.log(UserName, password);
+    setPassword(""); setUserName("");
     setRegisterState(!isRegistered);
   }
 useEffect(()=>{
@@ -65,24 +68,27 @@ async function Googlelogin(event){
         if(response.data.status=="error"){
           console.log(response.data);
           console.log(response.data.error);
-         
           setErrMessage(response.data.error);
         }
         else{
           setLoggedInUser(response.data.user);
-        history.push("/");}
+          history.push("/");}
       })
     }
     else{
     Axios.post('/api/register',user).then(function(response){
       console.log(response);
       if (response.data.status=='error'){
+        console.log(response.data);
+        console.log(response.data.error);        
         setErrMessage(response.data.error);
+        // setRegisterState(true);
+      }else{
         setRegisterState(true);
         history.push("/");
       }
+
     });
-    
   }
   }
   return (
@@ -110,13 +116,13 @@ async function Googlelogin(event){
                 </div>
     
     {/* <Form.Label className="loginsubtitle">Email address</Form.Label> */}
-    <TextField  id='username' size="Normal" className="logininput" type="email" placeholder="Enter email" />
+    <TextField  value={UserName} id='username' onChange={(e=>setUserName(e.target.value))} size="Normal" className="logininput" type="email" placeholder="Enter email" />
    
   </Form.Group>
 
   <Form.Group className="mb-3 logingroup textfield" controlId="formBasicPassword">
     {/* <Form.Label>Password</Form.Label> */}
-    <TextField id='password' className="logininput" as='input' type="password" placeholder="Password" />
+    <TextField id='password' value={password} onChange={(e=>setPassword(e.target.value))} className="logininput" as='input' type="password" placeholder="Password" />
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicCheckbox">
   {!isRegistered?

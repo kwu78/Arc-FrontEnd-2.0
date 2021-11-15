@@ -633,3 +633,22 @@ label {
   top: 60%;
 }
 
+/* comment section */
+#comment{
+  border-radius:5px;
+}
+.titleText{
+  font-size: 43px;
+  font-family: 'Spartan', sans-serif;
+  padding: 3% 0 2% 0;
+}
+.commentForm{
+  margin-top: 3%;
+}
+.buttonText{
+  font-family: 'Spartan', sans-serif;
+  margin-top:2px;
+}
+.commentBox{
+  margin:2% 10% 5% 0;
+}

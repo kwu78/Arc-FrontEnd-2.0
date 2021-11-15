@@ -48,13 +48,13 @@ export default function TemporaryDrawer() {
       paddingTop="50"
     >
     <List >
-         <ListItemButton component="a" href="/">          
+         <ListItemButton component="a" href="/comments">          
             <ListItemText disableTypography primary={<Typography type="body2" style={{ color: 'white', fontSize: '15px' }}>COMMENTED</Typography>} />
           </ListItemButton>
           <ListItemButton component="a" href="/">          
             <ListItemText disableTypography primary={<Typography type="body2" style={{ color: 'white', fontSize: '15px' }}>PINNED</Typography>} />
           </ListItemButton>
-          <ListItemButton component="a" href="/">          
+          <ListItemButton component="a" href="/myposts">          
             <ListItemText disableTypography primary={<Typography type="body2" style={{ color: 'white', fontSize: '15px' }}>MY POSTS</Typography>} />
           </ListItemButton>
         
