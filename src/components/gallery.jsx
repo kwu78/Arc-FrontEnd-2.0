@@ -6,6 +6,7 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from '@mui/material/ImageListItem';
 import Axios from "axios";
 import styled from 'styled-components';
+import {useHistory} from "react-router-dom";
 
 const ButtonS = styled.button`
 font-size: 15;
@@ -27,7 +28,7 @@ const ButtonToggle = styled(ButtonS)`
 const ButtonGroup = styled.div`
   display: flex;
 `;
-const types = ['Drawing', 'Photography'];
+const types = ['All', 'Drawing', 'Photography'];
 
 
 export function Gallery(props) {
@@ -41,8 +42,13 @@ export function Gallery(props) {
     // event.preventDefault();   
     setCommentState(true);
     setSentEntry(entry);
+  }
 
-}
+  function filter(e, type){
+    setActive(type);
+    console.log(type)
+  }
+  
   useEffect(() => {
     Axios.get("/api/login").then((response) => {
       if (response.data.loggedIn == true) {
@@ -82,7 +88,9 @@ export function Gallery(props) {
                     variant="outline-light"
                     key={type}
                     active={active === type}
-                    onClick={() => setActive(type)}
+                    onClick={
+                      (e) => filter(e, type)
+                    }
                   > 
                   {type}
                   </ButtonToggle>

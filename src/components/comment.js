@@ -12,12 +12,14 @@ import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
+
 function Comment(props) {
   console.log(props.entry._id);
   const [isLiked, setLikeState] = useState(false);
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
   const[errorMessage,setErrMessage]=useState('');
+  const[message,setMessage]=useState('');
   const[commentlist,setCommentlist]=useState([]);
   const history=useHistory();
   useEffect(()=>{
@@ -50,24 +52,31 @@ function Comment(props) {
   }
   Axios.post('/comments',comment).then(function(response){
     if(response.data.status=="error"){
+      setMessage('');
       setErrMessage(response.data.error);
       console.log(response.data.error);
     }else{
+      setMessage("Comment created successfully!");
       setErrMessage('');
     }
     console.log(response.data);
     
   });
-  
-  
+
   e.preventDefault();
   // props.onHide();
   //history.push("/");
 }
+
+function close(e){
+  props.onHide(e); 
+  setMessage('');
+  setErrMessage('');   
+};
   return (
     <>  
     <Modal {...props}  size="lg" animation={false}  centered >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton onClick={close}>
         <Modal.Title>Post Detail Page</Modal.Title>
       </Modal.Header>
       <Grid container spacing={2}>
@@ -102,6 +111,9 @@ function Comment(props) {
      </Form>
      <Form.Text style={{color:'red'}}>
           {errorMessage!=""?errorMessage:''}
+          </Form.Text>
+      <Form.Text style={{color:'green'}}>
+          {message!=""?message:''}
           </Form.Text>
      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
     {props.entry.userinfo==loggedInUser && commentlist?
@@ -145,7 +157,7 @@ function Comment(props) {
       
  <Modal.Footer>
         
-        <Button variant="secondary" onClick={props.onHide}>
+        <Button variant="secondary" onClick={close}>
           Close
         </Button>
       </Modal.Footer>
