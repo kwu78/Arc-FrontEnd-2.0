@@ -54,13 +54,13 @@ function Comment(props) {
     }
     console.log(response);
   });
-  
+
   e.preventDefault();
   // props.onHide();
   //history.push("/");
 }
   return (
-    <>  
+    <>
     <Modal {...props}  size="lg" animation={false}  centered >
       <Modal.Header closeButton>
         <Modal.Title>Post Detail Page</Modal.Title>
@@ -71,7 +71,7 @@ function Comment(props) {
           height={300}
           alt="171x180"
           src={"data:image/png;base64, " + props.entry.image}
-        />        
+        />
         <Figure.Caption className='post-describe'>
         <h4>
         {props.entry.title} <br></br> {props.entry.description}
@@ -81,7 +81,7 @@ function Comment(props) {
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
     {props.entry.userinfo==loggedInUser && commentlist?
     commentlist.map((comment)=>(
-      
+
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
@@ -102,7 +102,7 @@ function Comment(props) {
           }
         />
       </ListItem>
-      
+
     ))
       :<div></div>
     }
@@ -116,7 +116,7 @@ function Comment(props) {
        <Form>
       <Form.Group className="mb-3" >
     <Form.Label>Comment</Form.Label>
-    <Form.Control  
+    <Form.Control
       id='comment'
       placeholder="Leave a comment here"
     />
@@ -126,13 +126,13 @@ function Comment(props) {
         </Button>
      </Form>
       <Modal.Footer>
-        
+
         <Button variant="secondary" onClick={props.onHide}>
           Close
         </Button>
       </Modal.Footer>
     </Modal>
-   
+
   </>
   )
 }
