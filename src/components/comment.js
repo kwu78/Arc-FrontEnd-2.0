@@ -156,8 +156,11 @@ function close(e){
       
       
  <Modal.Footer>
-        
-        <Button variant="secondary" onClick={close}>
+ {props.entry.userinfo==loggedInUser?
+ <Button variant="danger" size="lg" onClick={close}>
+          Delete
+        </Button>:<div></div>}
+        <Button variant="outline-secondary" size="lg" onClick={close}>
           Close
         </Button>
       </Modal.Footer>
