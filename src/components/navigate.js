@@ -32,9 +32,8 @@ function search(){
   
   window.search=document.getElementById('search').value;
   console.log(window.search);
-  history.push("/homesearch");
-
-  
+  props.setImage(window.search);
+  // history.push("/search");
 }
  return (
     

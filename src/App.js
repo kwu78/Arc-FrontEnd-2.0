@@ -9,7 +9,7 @@ import {
   import Home from "./home";
   import Login from "./components/login";
   import Homemyposts from "./homemyposts";
-  import Homesearch from "./homesearch";
+  import Homesearch from "./homesearch.jsx";
   import Homemycomments from "./homemycomments";
   import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
   export default function App() {

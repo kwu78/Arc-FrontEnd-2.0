@@ -42,11 +42,22 @@ const Home = ({children}) => {
       };
     })
   },[]);
+function setImage(e){
+  console.log(e);
+  let search={keyword:e};
+  Axios.post("posts/fuzzy", search).then((response)=>{
+    console.log(response.data['fuzzy search']);
+
+    setSentImage(response.data['fuzzy search']);
+    console.log(sentImage);
+  
+  })
+}
 
 
   return (
     <div>
-      <Navigation user={loggedInUser} loggedIn={isLoggedIn}/>
+      <Navigation setImage={setImage} user={loggedInUser} loggedIn={isLoggedIn}/>
       <Gallery image={sentImage} loggedIn={isLoggedIn}/>
       <Add />
       <Drawer />

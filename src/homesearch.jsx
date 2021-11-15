@@ -28,9 +28,10 @@ const Homesearch = ({children}) => {
       };
     })
   },[]);
-  console.log=window.search;
+  console.log(window.search);
+  let keyword=window.search;
   useEffect(() => {
-    Axios.post("/fuzzy", window.search).then((response)=>{
+    Axios.get("/fuzzy", keyword).then((response)=>{
 
       let image={
         postid:response.data[0]._id,
@@ -43,11 +44,10 @@ const Homesearch = ({children}) => {
       console.log(response);
     })
   }, []);
-  useEffect(() => {
-    setLandingPageData(JsonData);
-  }, []);
-  
 
+
+  
+console.log("hereee");
 
   return (
     <div>
@@ -61,3 +61,4 @@ const Homesearch = ({children}) => {
 };
 
 export default Homesearch;
+
