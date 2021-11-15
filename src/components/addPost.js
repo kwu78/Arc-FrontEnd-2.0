@@ -143,7 +143,7 @@ function AddPost(props){
           key={choice.id}
           id={`radio-${choice.id}`}
           type="radio"
-          variant='outline-primary'
+          variant='outline-secondary'
           name="artType"
           value={choice.value}
           checked={artType === choice.value}
@@ -165,7 +165,7 @@ function AddPost(props){
           key={option.id}
           id={`checkbox-${option.id}`}
           type="checkbox"
-          variant="outline-primary"
+          variant="outline-secondary"
           name="critique"
           checked={critique === option.value}
           value={option.value}
@@ -180,10 +180,10 @@ function AddPost(props){
     </Row>
     <Row>
       <Col md = {{ offset:0}}>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={props.onHide} type = 'button' variant = "secondary">Close</Button>
       </Col>
       <Col md = {{span:1, offset:10}}>
-        <Button onClick={upload} type='submit'>Upload</Button>
+        <Button onClick={upload} type='submit' variant = "secondary">Upload</Button>
       </Col>
     </Row>
   </Container>
