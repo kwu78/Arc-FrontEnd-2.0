@@ -28,7 +28,7 @@ const ButtonToggle = styled(ButtonS)`
 const ButtonGroup = styled.div`
   display: flex;
 `;
-const types = ['All', 'Drawing', 'Photography'];
+const types = ['All', 'Artwork', 'Photography'];
 
 
 export function Gallery(props) {
@@ -37,16 +37,12 @@ export function Gallery(props) {
   const [loggedInUser, setLoggedInUser] = useState('');
   const[sentEntry,setSentEntry]=useState([]);
   const [active, setActive] = useState(types[0]);
+  const[displayimage, setDisplayimage] = useState([]);
 
   function clickMe(event, entry){
     // event.preventDefault();   
     setCommentState(true);
     setSentEntry(entry);
-  }
-
-  function filter(e, type){
-    setActive(type);
-    console.log(type)
   }
   
   useEffect(() => {
@@ -58,9 +54,86 @@ export function Gallery(props) {
       };
     })
   }, []);
-  if (props.image.length != 0) { console.log(props.image[0]) }
 
-  if (props.image.length != 0) {
+  function filter(e, type){
+    setActive(type);
+    console.log(type)
+    if (type == 'All'){
+      setDisplayimage(props.image);
+    }
+    if (type == 'Artwork'){
+      Axios.get('/posts/type?type=artwork')
+      .then(function (response) {
+        setDisplayimage(response.data['type search']);
+      })
+    }
+    if (type == 'Photography'){
+      Axios.get('/posts/type?type=photography')
+      .then(function (response) {
+        setDisplayimage(response.data['type search']);
+      })
+    }
+  }
+
+  if (displayimage.length != 0) {
+    return (
+      <div>
+        <div id='portfolio' className='text-center'>
+          <div className='container'>
+            <div className='section-title'>
+              <p>
+                GALLERY
+              </p>
+              <br></br>
+              <br></br>
+              <br></br>
+              <p>
+                To help an artist gather and give genuine critique anonymously from other artists<br></br>in order to replenish creativity and create better art
+              </p>
+            </div>
+            <div 
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}>
+                <ButtonGroup>
+                {types.map(type => (
+                  <ButtonToggle
+                    variant="outline-light"
+                    key={type}
+                    active={active === type}
+                    onClick={
+                      (e) => filter(e, type)
+                    }
+                  > 
+                  {type}
+                  </ButtonToggle>
+                ))}
+                </ButtonGroup>
+                </div>
+                <p>
+                </p>
+            <div>
+            <ImageList variant="masonry" cols={3} gap={8}>
+                  {displayimage.map((entry) => (                    
+                    <ImageListItem key={entry.image}>
+                      {props.loggedIn ? <a onClick={(e) => {clickMe(e, entry)}} ><img width="100%" src={"data:image/png;base64, " + entry.image}></img></a> :
+                        <a href='/login'><img width="100%" src={"data:image/png;base64, " + entry.image}></img></a>}
+                    </ImageListItem>
+                  ))
+                  }
+                </ImageList>
+            </div>
+          </div>
+        </div>
+        <Comment show={commentState} onShow={() => setCommentState(true)}
+          onHide={() => setCommentState(false) } entry={sentEntry} />
+
+      </div>
+
+    )
+  } else { //there is a big problem here
     return (
       <div>
         <div id='portfolio' className='text-center'>
@@ -118,7 +191,5 @@ export function Gallery(props) {
       </div>
 
     )
-  } else {
-    return <div>Hi</div>
   }
 }
