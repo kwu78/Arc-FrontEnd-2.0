@@ -30,7 +30,7 @@ function search(){
   
   let search=document.getElementById('search').value;
   console.log("searched");
-  Axios.post('/fuzzy',search).then(function(response){
+  Axios.post('/posts',search).then(function(response){
     if(response.data.status=="error"){
       setErrMessage(response.data.error);
       console.log(response.data.error);
@@ -39,6 +39,8 @@ function search(){
     }
     console.log(response.data);
   });
+
+ 
 }
  return (
     

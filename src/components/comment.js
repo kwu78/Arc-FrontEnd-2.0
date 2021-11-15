@@ -56,6 +56,7 @@ function Comment(props) {
       setErrMessage('');
     }
     console.log(response.data);
+    
   });
   
   

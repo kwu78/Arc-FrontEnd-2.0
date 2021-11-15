@@ -13,36 +13,36 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
   speedAsDuration: true,
 });
 
-const Home = ({children}) => {
+const Homemyposts = ({children}) => {
   const [landingPageData, setLandingPageData] = useState({});
   const[sentImage,setSentImage]=useState([]);
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
-  useEffect(() => {
-    Axios.post("posts/all",3).then((response)=>{
-
-      let image={
-        postid:response.data[0]._id,
-        postimage:response.data[0].image
-        
-      
-      }
-      setSentImage(response.data);
-      console.log(sentImage);
-      console.log(response);
-    })
-  }, []);
- 
   useEffect(()=>{
     Axios.get("/api/login").then((response)=>{
       if(response.data.loggedIn===true){
         console.log(response.data.user);
         setLoggedIn(true);
-        setLoggedInUser(response.data.user.username);
+        setLoggedInUser(response.data.user._id);
+        
       };
     })
   },[]);
+  useEffect(() => {
+    Axios.post("/myPosts", loggedInUser).then((response)=>{
 
+      let image={
+        postid:response.data[0]._id,
+        postimage:response.data[0].image       
+      }
+      
+      console.log(sentImage);
+      console.log(response);
+      console.log("myposts returned");
+    })
+  }, []);
+ 
+  
 
   return (
     <div>
@@ -55,4 +55,4 @@ const Home = ({children}) => {
   );
 };
 
-export default Home;
+export default Homemyposts;

@@ -13,13 +13,13 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
   speedAsDuration: true,
 });
 
-const Home = ({children}) => {
+const Homesearch = ({children}) => {
   const [landingPageData, setLandingPageData] = useState({});
   const[sentImage,setSentImage]=useState([]);
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
   useEffect(() => {
-    Axios.post("posts/all",3).then((response)=>{
+    Axios.post("/fuzzy",3).then((response)=>{
 
       let image={
         postid:response.data[0]._id,
@@ -32,7 +32,9 @@ const Home = ({children}) => {
       console.log(response);
     })
   }, []);
- 
+  useEffect(() => {
+    setLandingPageData(JsonData);
+  }, []);
   useEffect(()=>{
     Axios.get("/api/login").then((response)=>{
       if(response.data.loggedIn===true){
@@ -55,4 +57,4 @@ const Home = ({children}) => {
   );
 };
 
-export default Home;
+export default Homesearch;
