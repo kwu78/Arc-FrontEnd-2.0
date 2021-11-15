@@ -31,8 +31,8 @@ const Homemyposts = ({children}) => {
         
         let userId = loggedInUserID;
         console.log(userId);
-        let url = `/posts/myPosts?userId=${userId}`
-      
+        let url = `/posts/myPosts?userId=${userId}`;
+        console.log(url);
         Axios.get(`${url}`)
         .then((response)=>{
           console.log(response.data['user posts search']);
