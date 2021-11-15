@@ -48,7 +48,7 @@ export default function TemporaryDrawer() {
       paddingTop="50"
     >
     <List >
-         <ListItemButton component="a" href="/mycomments">          
+         <ListItemButton component="a" href="/comments">          
             <ListItemText disableTypography primary={<Typography type="body2" style={{ color: 'white', fontSize: '15px' }}>COMMENTED</Typography>} />
           </ListItemButton>
           <ListItemButton component="a" href="/">          
