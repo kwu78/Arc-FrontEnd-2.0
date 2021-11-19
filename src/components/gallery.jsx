@@ -79,7 +79,7 @@ export function Gallery(props) {
     return (
       <div>
         <div id='portfolio' className='text-center'>
-          <div className='container'>
+          <div className='container'> 
             <div className='section-title'>
               <p>
                 GALLERY
@@ -87,16 +87,24 @@ export function Gallery(props) {
               <br></br>
               <br></br>
               <br></br>
+              {props.myposts?
+              <p>
+            This is your art space
+          </p>
+          :
               <p>
                 To help an artist gather and give genuine critique anonymously from other artists<br></br>in order to replenish creativity and create better art
-              </p>
-            </div>
+              </p>}
+            </div> 
+            {props.myposts?
+            <div></div>:               
             <div 
                 style={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center"
                 }}>
+                
                 <ButtonGroup>
                 {types.map(type => (
                   <ButtonToggle
@@ -107,11 +115,12 @@ export function Gallery(props) {
                       (e) => filter(e, type)
                     }
                   > 
+                 
                   {type}
                   </ButtonToggle>
                 ))}
                 </ButtonGroup>
-                </div>
+                </div>}
                 <p>
                 </p>
             <div>
@@ -145,16 +154,24 @@ export function Gallery(props) {
               <br></br>
               <br></br>
               <br></br>
+            {props.myposts?
+              <p>
+            This is your art space
+          </p>
+          :
               <p>
                 To help an artist gather and give genuine critique anonymously from other artists<br></br>in order to replenish creativity and create better art
-              </p>
+              </p>}
             </div>
+            {props.myposts?
+            <div></div>:  
             <div 
                 style={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center"
                 }}>
+                
                 <ButtonGroup>
                 {types.map(type => (
                   <ButtonToggle
@@ -169,7 +186,7 @@ export function Gallery(props) {
                   </ButtonToggle>
                 ))}
                 </ButtonGroup>
-                </div>
+                </div>}
                 <p>
                 </p>
             <div>

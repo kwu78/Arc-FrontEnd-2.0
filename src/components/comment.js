@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 
 
 function Comment(props) {
-  console.log(props.entry._id);
+  // console.log(props.entry._id);
   const [isLiked, setLikeState] = useState(false);
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
@@ -73,7 +73,24 @@ function close(e){
   setMessage('');
   setErrMessage('');   
 };
-console.log(commentlist);
+function deletep(e){
+  console.log("delete clicked");
+  let deletep={
+    postId:props.entry._id,
+    userId:loggedInUser
+  }
+  Axios.post('posts/deleteOnePost',deletep).then(function(response){
+    if(response.data["error"]){
+      setMessage('');
+      setErrMessage("delete failed");
+      console.log(response.data["delete post"]);
+    } 
+    
+  });
+  props.onHide(e);
+  history.push("/");
+}
+// console.log(commentlist);
   return (
     <>  
     <Modal {...props}   size="lg" animation={false}  centered >
@@ -174,17 +191,12 @@ console.log(commentlist);
     </Grid>
   </Grid>
 
-      {/* <div className='toggle-like'>
-      <Button variant="secondary" onClick={handleClicked}>
-        {isLiked? "Unlike":"Like"}
-      </Button>
-      </div> */}
  
       
       
  <Modal.Footer>
  {props.entry.userinfo==loggedInUser?
- <Button variant="danger" size="lg" onClick={close}>
+ <Button variant="danger" size="lg" onClick={deletep}>
           Delete
         </Button>:<div></div>}
         <Button variant="outline-secondary" size="lg" onClick={close}>

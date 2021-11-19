@@ -21,7 +21,8 @@ const style = {
 
 function Navigate(props) {
 console.log(props.user);
-console.log(props.loggedIn)
+console.log(props.loggedIn);
+console.log(props.myposts);
 const[errorMessage,setErrMessage]=useState('');
 const history=useHistory();
 function Logout(){
@@ -54,8 +55,10 @@ function search(){
         } 
                
       </Nav>
-        
-      <Form className="search-all d-flex">
+      {props.myposts?
+      <Form className="search-all d-flex"></Form>
+    :
+    <Form className="search-all d-flex">
       <FormControl
         style={{fontSize:"1.5rem", marginRight:"2%", marginTop:"7%"}}
         type="search"
@@ -65,7 +68,7 @@ function search(){
         id='search'
       />
       <Button  variant="outline-light" onClick={search} style={{marginTop:"7%"}}>Search</Button>
-      </Form>
+      </Form>}
     
     </Navbar.Collapse>
     

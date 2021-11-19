@@ -10,7 +10,7 @@ import {
   import Login from "./components/login";
   import Homemyposts from "./homemyposts";
   import Homemycomments from "./homemycomments";
-  import Homesearch from "./homesearch.jsx";
+
   
 
 
@@ -32,8 +32,8 @@ import {
             <Route exact path="/" component={Home} />
             <Route path="/Login" component={Login} />
             <Route path="/myposts" component={Homemyposts} />
-            <Route path="/comments" compoennt={Homemycomments} />
-            <Route path="/search" compoennt={Homesearch} />
+            <Route path="/comments" component={Homemycomments} />
+      
             
           </Router>
         </div>

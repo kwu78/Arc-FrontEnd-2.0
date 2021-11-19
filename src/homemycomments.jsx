@@ -28,18 +28,18 @@ const Homemycomments = ({children}) => {
         setLoggedInUser(response.data.user);
         setLoggedInUserID(response.data.user._id);
         
-        let url = `/posts/myComments?userId=${response.data.user._id}`;
+         let url = `/comments/myComments?userId=${response.data.user._id}`;
         console.log(url);
         Axios.get(`${url}`)
         .then((response)=>{
-          console.log(response.data['user comment search']);
+          console.log(response);
           let image={
-            postid:response.data['user comment search']._id,
-            postimage:response.data['user comment search'].image       
+            postid:response.data['user commented posts']._id,
+            postimage:response.data['user commented posts'].image       
           };
-          setSentImage(response.data['user comment search']);
+          setSentImage(response.data['user commented posts']);
      
-        });               
+        }); 
         }     
       
     });
@@ -50,8 +50,8 @@ const Homemycomments = ({children}) => {
 
   return (
     <div>
-      <Navigation user={loggedInUser} loggedIn={isLoggedIn}/>
-      <Gallery image={sentImage} loggedIn={isLoggedIn}/>
+      <Navigation user={loggedInUser} loggedIn={isLoggedIn} myposts/>
+      <Gallery image={sentImage} loggedIn={isLoggedIn} myposts/>
       <Add />
       <Drawer />
     </div>

@@ -50,8 +50,8 @@ const Homemyposts = ({children}) => {
 
   return (
     <div>
-      <Navigation user={loggedInUser} loggedIn={isLoggedIn}/>
-      <Gallery image={sentImage} loggedIn={isLoggedIn}/>
+      <Navigation user={loggedInUser} loggedIn={isLoggedIn} myposts/>
+      <Gallery image={sentImage} loggedIn={isLoggedIn} myposts/>
       <Add />
       <Drawer />
     </div>
