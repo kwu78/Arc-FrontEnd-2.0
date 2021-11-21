@@ -19,7 +19,7 @@ function AddPost(props){
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
   const [files, setFiles] = useState([]);
-
+  const[errorMessage,setErrMessage]=useState('');
   const[clicked,setClicked]=useState(false);
   const history=useHistory();
   useEffect(()=>{
@@ -36,6 +36,11 @@ function AddPost(props){
     {id:'2',value:'photography'}
   ]
 
+  function close(e){
+    props.onHide(e); 
+    setErrMessage('');   
+  };
+
   function uploadImage(e){
     setPhotoURL(URL.createObjectURL(e.target.files[0]));
   }
@@ -48,23 +53,31 @@ function AddPost(props){
   //    maxFiles:1,
   //    allowBrowse:false
   //  })
-   
-    let post={
-      title:document.getElementById('photoID').value,
-      description:document.getElementById('description').value,
-      artType:artType,
-      photoURL:photoURL,
-      image:files[0].getFileEncodeBase64String(),
-      imageType:files[0].fileType,
-      userinfo:loggedInUser._id
+  
+    if (files[0]){
+      let post={
+        title:document.getElementById('photoID').value,
+        description:document.getElementById('description').value,
+        artType:artType,
+        photoURL:photoURL,
+        image:files[0].getFileEncodeBase64String(),
+        imageType:files[0].fileType,
+        userinfo:loggedInUser._id
+      }
+      console.log(post);
+      setClicked(true);
+      Axios.post('/posts',post).then(function(response){
+        if(response.data.status=="error"){
+          setErrMessage(response.data.error);
+          console.log(response.data.error);
+        }
+      }); 
+      setErrMessage('');
+      props.onHide();
+      history.push("/");
+    } else{
+      setErrMessage("Please upload an image");
     }
-    console.log(post);
-    setClicked(true);
-    Axios.post('/posts',post).then(function(response){
-      console.log(response);
-    });
-    props.onHide();
-    history.push("/");
   }
     return (
     <Modal
@@ -73,13 +86,16 @@ function AddPost(props){
     animation={false}
     centered
   >
-    <Modal.Header closeButton>
+      <Modal.Header closeButton onClick={close}>
         <Modal.Title id="contained-modal-title-vcenter">
           Add A New Post
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h4>Upload Your Art Here</h4>
+        <Form.Text style={{color:'red'}}>
+          {errorMessage!=""?errorMessage:''}
+          </Form.Text>
         <FloatingLabel  controlId="floatingTextarea" label="Title" className="mb-3">
     <Form.Control id='photoID' as="textarea" placeholder="Leave a comment here" />
   </FloatingLabel>
@@ -173,7 +189,7 @@ function AddPost(props){
   </fieldset>
       </Modal.Body>
     <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={close}>Close</Button>
         <Button onClick={upload} type='submit'>Upload</Button>
       </Modal.Footer>
    </Modal>);

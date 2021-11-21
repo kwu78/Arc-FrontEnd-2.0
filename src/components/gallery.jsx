@@ -59,7 +59,7 @@ export function Gallery(props) {
     })
   }, []);
   useEffect(()=>{
-  setDisplayimage(props.image)},[props.image]
+    setDisplayimage(props.image)},[props.image]
   );
 
   function filter(e, type){
@@ -67,8 +67,10 @@ export function Gallery(props) {
     setActive(type);
     console.log(type)
     if (type == 'All'){
-      setDisplayimage(props.image);
-      setLoading(false);
+      Axios.post("posts/all",3).then((response)=>{
+        setDisplayimage(response.data);
+        setLoading(false);
+      })
     }
     if (type == 'Artwork'){
       Axios.get('/posts/type?type=artwork')
@@ -159,69 +161,6 @@ export function Gallery(props) {
     console.log("this case");
     return (
       <ReactLoading/>
-      // <div>
-      //   <div id='portfolio' className='text-center'>
-      //     <div className='container'>
-      //       <div className='section-title'>
-      //         <p>
-      //           GALLERY
-      //         </p>
-      //         <br></br>
-      //         <br></br>
-      //         <br></br>
-      //       {props.myposts?
-      //         <p>
-      //       This is your art space
-      //     </p>
-      //     :
-      //         <p>
-      //           To help an artist gather and give genuine critique anonymously from other artists<br></br>in order to replenish creativity and create better art
-      //         </p>}
-      //       </div>
-      //       {props.myposts?
-      //       <div></div>:  
-      //       <div 
-      //           style={{
-      //             display: "flex",
-      //             justifyContent: "center",
-      //             alignItems: "center"
-      //           }}>
-                
-      //           <ButtonGroup>
-      //           {types.map(type => (
-      //             <ButtonToggle
-      //               variant="outline-light"
-      //               key={type}
-      //               active={active === type}
-      //               onClick={
-      //                 (e) => filter(e, type)
-      //               }
-      //             > 
-      //             {type}
-      //             </ButtonToggle>
-      //           ))}
-      //           </ButtonGroup>
-      //           </div>}
-      //           <p>
-      //           </p>
-      //       <div>
-      //       {/* <ImageList variant="masonry" cols={3} gap={8}>
-      //             {props.image.map((entry) => (                    
-      //               <ImageListItem key={entry.image}>
-      //                 {props.loggedIn ? <a onClick={(e) => {clickMe(e, entry)}} ><img width="100%" src={"data:image/png;base64, " + entry.image}></img></a> :
-      //                   <a href='/login'><img width="100%" src={"data:image/png;base64, " + entry.image}></img></a>}
-      //               </ImageListItem>
-      //             ))
-      //             }
-      //           </ImageList> */}
-      //           <ReactLoading/>
-      //       </div>
-      //     </div>
-      //   </div>
-      //   <Comment show={commentState} onShow={() => setCommentState(true)}
-      //     onHide={() => setCommentState(false) } entry={sentEntry} />
-
-      // </div>
 
     )
   }
