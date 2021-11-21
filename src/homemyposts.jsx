@@ -20,6 +20,7 @@ const Homemyposts = ({children}) => {
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
   const [loggedInUserID,setLoggedInUserID]=useState('');
+  const [ load, setLoading ] = useState(true);
   useEffect(()=>{
     Axios.get("/api/login").then((response)=>{
       if(response.data.loggedIn===true){
@@ -38,6 +39,7 @@ const Homemyposts = ({children}) => {
             postimage:response.data['user posts search'].image       
           };
           setSentImage(response.data['user posts search']);
+          setLoading(false);
      
         });               
         }     
@@ -51,7 +53,7 @@ const Homemyposts = ({children}) => {
   return (
     <div>
       <Navigation user={loggedInUser} loggedIn={isLoggedIn} myposts/>
-      <Gallery image={sentImage} loggedIn={isLoggedIn} myposts/>
+      <Gallery loaded={load} image={sentImage} loggedIn={isLoggedIn} myposts/>
       <Add />
       <Drawer />
     </div>
