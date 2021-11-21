@@ -8,6 +8,7 @@ import Add from "./components/add";
 import Drawer from "./components/drawer";
 import Axios from "axios";
 
+
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
   speedAsDuration: true,
@@ -18,6 +19,7 @@ const Home = ({children}) => {
   const[sentImage,setSentImage]=useState([]);
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
+  const [ load, setLoading ] = useState(true);
   useEffect(() => {
     Axios.post("posts/all",3).then((response)=>{
 
@@ -30,6 +32,7 @@ const Home = ({children}) => {
       setSentImage(response.data);
       console.log(sentImage);
       console.log(response);
+      setLoading(false);
     })
   }, []);
  
@@ -44,8 +47,8 @@ const Home = ({children}) => {
   },[]);
 function setImage(e){
   console.log(e);
-  let search={keyword:e};
-  Axios.post("posts/fuzzy", search).then((response)=>{
+  let params={keyword:e};
+  Axios.get("posts/fuzzy", {params}).then((response)=>{
     console.log(response.data['fuzzy search']);
 
     setSentImage(response.data['fuzzy search']);
@@ -58,7 +61,7 @@ function setImage(e){
   return (
     <div>
       <Navigation setImage={setImage} user={loggedInUser} loggedIn={isLoggedIn}/>
-      <Gallery image={sentImage} loggedIn={isLoggedIn}/>
+      <Gallery loaded={load} image={sentImage} loggedIn={isLoggedIn}/>
       <Add />
       <Drawer />
     </div>

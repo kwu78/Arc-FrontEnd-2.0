@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 
 
 function Comment(props) {
-  console.log(props.entry._id);
+  // console.log(props.entry._id);
   const [isLiked, setLikeState] = useState(false);
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
@@ -73,9 +73,28 @@ function close(e){
   setMessage('');
   setErrMessage('');   
 };
+function deletep(e){
+  console.log("delete clicked");
+  let deletep={
+    postId:props.entry._id,
+    userId:loggedInUser
+  }
+  Axios.post('posts/deleteOnePost',deletep).then(function(response){
+    if(response.data["error"]){
+      setMessage('');
+      setErrMessage("delete failed");
+      console.log(response.data["delete post"]);
+    } 
+    
+  });
+  props.onHide(e);
+  history.push("/");
+}
+// console.log(commentlist);
   return (
     <>  
-    <Modal {...props}  size="lg" animation={false}  centered >
+    <Modal {...props}   size="lg" animation={false}  centered >
+     
       <Modal.Header closeButton onClick={close}>
         <Modal.Title>Post Detail Page</Modal.Title>
       </Modal.Header>
@@ -118,7 +137,7 @@ function close(e){
      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
     {props.entry.userinfo==loggedInUser && commentlist?
     commentlist.map((comment)=>(
-      
+  
       <ListItem style={{paddingLeft:0}} alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
@@ -144,26 +163,47 @@ function close(e){
       :<div></div>
     }
     </List>
+    {/* <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    {commentlist.map((comment)=>{
+      (props.entry.userinfo==loggedInUser)?
+      <ListItem style={{paddingLeft:0}} alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="anonymous user"r
+          secondary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: 'inline' }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+              >
+              </Typography>
+              {comment.comment}
+            </React.Fragment>
+          }
+        />
+      </ListItem>:<div></div>
+    })}
+    </List> */}
     </Grid>
   </Grid>
 
-      {/* <div className='toggle-like'>
-      <Button variant="secondary" onClick={handleClicked}>
-        {isLiked? "Unlike":"Like"}
-      </Button>
-      </div> */}
  
       
       
  <Modal.Footer>
  {props.entry.userinfo==loggedInUser?
- <Button variant="danger" size="lg" onClick={close}>
+ <Button variant="danger" size="lg" onClick={deletep}>
           Delete
         </Button>:<div></div>}
         <Button variant="outline-secondary" size="lg" onClick={close}>
           Close
         </Button>
       </Modal.Footer>
+  
     </Modal>
    
   </>

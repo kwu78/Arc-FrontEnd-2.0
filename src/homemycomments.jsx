@@ -7,6 +7,7 @@ import Navigation from "./components/navigate";
 import Add from "./components/add";
 import Drawer from "./components/drawer";
 import Axios from "axios";
+import { getPopoverUtilityClass } from "@mui/material";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -18,45 +19,39 @@ const Homemycomments = ({children}) => {
   const[sentImage,setSentImage]=useState([]);
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
+  const [loggedInUserID,setLoggedInUserID]=useState('');
   useEffect(()=>{
     Axios.get("/api/login").then((response)=>{
       if(response.data.loggedIn===true){
-        console.log(response.data.user);
+        console.log(response.data.user._id);
         setLoggedIn(true);
-        setLoggedInUser(response.data.user._id);
+        setLoggedInUser(response.data.user);
+        setLoggedInUserID(response.data.user._id);
         
-      };
-    })
-  },[]);
-  useEffect(() => {
-    Axios.post("/myComments", loggedInUser).then((response)=>{
-
-      let image={
-        postid:response.data[0]._id,
-        postimage:response.data[0].image
-            
-      }
-      setSentImage(response.data);
-      console.log(sentImage);
-      console.log(response);
-    })
-  }, []);
- 
-  useEffect(()=>{
-    Axios.get("/api/login").then((response)=>{
-      if(response.data.loggedIn===true){
-        console.log(response.data.user);
-        setLoggedIn(true);
-        setLoggedInUser(response.data.user.username);
-      };
-    })
+         let url = `/comments/myComments?userId=${response.data.user._id}`;
+        console.log(url);
+        Axios.get(`${url}`)
+        .then((response)=>{
+          console.log(response);
+          let image={
+            postid:response.data['user commented posts']._id,
+            postimage:response.data['user commented posts'].image       
+          };
+          setSentImage(response.data['user commented posts']);
+     
+        }); 
+        }     
+      
+    });
+    
+   
   },[]);
 
 
   return (
     <div>
-      <Navigation user={loggedInUser} loggedIn={isLoggedIn}/>
-      <Gallery image={sentImage} loggedIn={isLoggedIn}/>
+      <Navigation user={loggedInUser} loggedIn={isLoggedIn} myposts/>
+      <Gallery image={sentImage} loggedIn={isLoggedIn} myposts/>
       <Add />
       <Drawer />
     </div>
