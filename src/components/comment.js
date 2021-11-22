@@ -29,14 +29,18 @@ function Comment(props) {
         setLoggedIn(true);
         setLoggedInUser(response.data.user._id);
       };
-    })
+    }).catch((error)=> {
+      setErrMessage("Error encountered on the server.");
+    }); 
     let post={post_id:props.entry._id};
     console.log(post);
     Axios.post("/comments/all",post).then((response)=>{
       console.log(response.data);
       setCommentlist(response.data);
 
-    })
+    }).catch((error)=> {
+      setErrMessage("Error encountered on the server.");
+    }); 
    },[props.entry._id]);
   function handleClicked(){
     setLikeState(!isLiked);
@@ -61,8 +65,9 @@ function Comment(props) {
     }
     console.log(response.data);
     
+  }).catch((error)=> {
+    setErrMessage("Error encountered on the server.");
   });
-
   e.preventDefault();
   // props.onHide();
   //history.push("/");
@@ -86,6 +91,8 @@ function deletep(e){
       console.log(response.data["delete post"]);
     } 
     
+  }).catch((error)=> {
+    setErrMessage("Error encountered on the server.");
   });
   props.onHide(e);
   history.push("/");

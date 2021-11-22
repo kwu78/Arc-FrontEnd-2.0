@@ -29,7 +29,9 @@ function AddPost(props){
         setLoggedIn(true);
         setLoggedInUser(response.data.user);
       };
-    })
+    }).catch((error)=> {
+      setErrMessage("Error encountered on the server.");
+    }); 
   },[]);
   const type=[
     {id:'1',value:'artwork'},
@@ -67,10 +69,9 @@ function AddPost(props){
       console.log(post);
       setClicked(true);
       Axios.post('/posts',post).then(function(response){
-        if(response.data.status=="error"){
-          setErrMessage(response.data.error);
-          console.log(response.data.error);
-        }
+
+      }).catch((error)=> {
+        setErrMessage("Error encountered on the server.");
       }); 
       setErrMessage('');
       props.onHide();

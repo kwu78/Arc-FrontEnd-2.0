@@ -43,7 +43,7 @@ export function Gallery(props) {
   const [ load, setLoading ] = useState(false);
 
   const[displayimage, setDisplayimage] = useState([]);
-  const[message,setMessage]=useState('');
+  const[errorMessage,setErrMessage]=useState('');
 
   function clickMe(event, entry){
     // event.preventDefault();   
@@ -58,7 +58,9 @@ export function Gallery(props) {
         setLoggedIn(true);
         setLoggedInUser(response.data.user.username);
       };
-    })
+    }).catch((error)=> {
+      setErrMessage("Error encountered on the server.");
+    });
   }, []);
   useEffect(()=>{
     setDisplayimage(props.image)},[props.image]
@@ -72,21 +74,27 @@ export function Gallery(props) {
       Axios.post("posts/all",3).then((response)=>{
         setDisplayimage(response.data);
         setLoading(false);
-      })
+      }).catch((error)=> {
+        setErrMessage("Error encountered on the server.");
+      });
     }
     if (type == 'Artwork'){
       Axios.get('/posts/type?type=artwork')
       .then(function (response) {
         setDisplayimage(response.data['type search']);
         setLoading(false);
-      })
+      }).catch((error)=> {
+        setErrMessage("Error encountered on the server.");
+      });
     }
     if (type == 'Photography'){
       Axios.get('/posts/type?type=photography')
       .then(function (response) {
         setDisplayimage(response.data['type search']);
         setLoading(false);
-      })
+      }).catch((error)=> {
+        setErrMessage("Error encountered on the server.");
+      });
     }
   }
 
@@ -110,6 +118,8 @@ export function Gallery(props) {
               ||(props.page==2&&<p>This is what you critiqued</p>)}
               
             </div> 
+            <p>  {errorMessage} </p>
+
             {props.page?
             <div>
             <p>  {props.message} </p>
@@ -163,7 +173,11 @@ export function Gallery(props) {
   } else { //there is a big problem here
     console.log("this case");
     return (
+      <div>
+      <p>  {"We ran out of images for you"} </p>
       <ReactLoading/>
+      </div>
+
     )
   }
 }

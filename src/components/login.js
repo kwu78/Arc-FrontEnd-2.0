@@ -44,7 +44,9 @@ useEffect(()=>{
       console.log(response.data.user);
       setLoggedInUser(response.data.user.username);
     };
-  })
+  }).catch((error)=> {
+    setErrMessage("Error encountered on the server.");
+  });
 },[]);
 async function Googlelogin(event){
   event.preventDefault();
@@ -73,7 +75,9 @@ async function Googlelogin(event){
         else{
           setLoggedInUser(response.data.user);
           history.push("/");}
-      })
+      }).catch((error)=> {
+        setErrMessage("Error encountered on the server.");
+      });
     }
     else{
     Axios.post('/api/register',user).then(function(response){
@@ -88,7 +92,9 @@ async function Googlelogin(event){
         history.push("/");
       }
 
-    });
+    }).catch((error)=> {
+      setErrMessage("Error encountered on the server.");
+    });;
   }
   }
   return (

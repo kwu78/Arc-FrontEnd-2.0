@@ -31,6 +31,8 @@ export default function TemporaryDrawer() {
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [state, setState] = React.useState(false);
   const anchor = 'right';
+  const[errorMessage,setErrMessage]=useState('');
+
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -45,6 +47,8 @@ export default function TemporaryDrawer() {
         setLoggedIn(true);
        
         }         
+    }).catch((error)=> {
+      setErrMessage("Error encountered on the server.");
     });  
    
   },[]);

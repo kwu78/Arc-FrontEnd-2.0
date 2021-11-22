@@ -20,6 +20,8 @@ const Home = ({children}) => {
   const [isLoggedIn, setLoggedIn]=useState(false);
   const [loggedInUser,setLoggedInUser]=useState('');
   const [ load, setLoading ] = useState(true);
+  const[errorMessage,setErrMessage]=useState('');
+
   useEffect(() => {
     Axios.post("posts/all",3).then((response)=>{
 
@@ -33,7 +35,9 @@ const Home = ({children}) => {
       console.log(sentImage);
       console.log(response);
       setLoading(false);
-    })
+    }).catch((error)=> {
+      setErrMessage("Error encountered on the server.");
+    });
   }, []);
  
   useEffect(()=>{
@@ -43,7 +47,9 @@ const Home = ({children}) => {
         setLoggedIn(true);
         setLoggedInUser(response.data.user.username);
       };
-    })
+    }).catch((error)=> {
+      setErrMessage("Error encountered on the server.");
+    });
   },[]);
 function setImage(e){
   console.log(e);
@@ -54,14 +60,16 @@ function setImage(e){
     setSentImage(response.data['fuzzy search']);
     console.log(sentImage);
   
-  })
+  }).catch((error)=> {
+    setErrMessage("Error encountered on the server.");
+  });
 }
 
 
   return (
     <div>
       <Navigation setImage={setImage} user={loggedInUser} loggedIn={isLoggedIn}/>
-      <Gallery loaded={load} image={sentImage} loggedIn={isLoggedIn} message={''} page={0}/>
+      <Gallery loaded={load} image={sentImage} loggedIn={isLoggedIn} message={''} error={errorMessage}page={0}/>
       <Add />
       <Drawer />
     </div>

@@ -27,7 +27,9 @@ const[errorMessage,setErrMessage]=useState('');
 const history=useHistory();
 function Logout(){
   
-  Axios.get('/api/logout');
+  Axios.get('/api/logout').catch((error)=> {
+    setErrMessage("Error encountered on the server.");
+  });
 }
 function search(){
   

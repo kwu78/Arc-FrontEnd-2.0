@@ -22,6 +22,7 @@ const Homemycomments = ({children}) => {
   const [loggedInUserID,setLoggedInUserID]=useState('');
   const [ load, setLoading ] = useState(true);
   const[message,setMessage]=useState('');
+  const[errorMessage,setErrMessage]=useState('');
 
   useEffect(()=>{
     Axios.get("/api/login").then((response)=>{
@@ -47,7 +48,9 @@ const Homemycomments = ({children}) => {
           }else{
             setMessage("")
           } 
-        }); 
+        }).catch((error)=> {
+          setErrMessage("Error encountered on the server.");
+        });; 
         }     
     });
     
@@ -58,7 +61,7 @@ const Homemycomments = ({children}) => {
   return (
     <div>
       <Navigation user={loggedInUser} loggedIn={isLoggedIn} page/>
-      <Gallery loaded={load} image={sentImage} message = {message} loggedIn={isLoggedIn} page={2}/>
+      <Gallery loaded={load} image={sentImage} message = {message} loggedIn={isLoggedIn} error={errorMessage} page={2}/>
       <Add />
       <Drawer />
     </div>

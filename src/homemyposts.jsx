@@ -22,6 +22,7 @@ const Homemyposts = ({children}) => {
   const [loggedInUserID,setLoggedInUserID]=useState('');
   const [ load, setLoading ] = useState(true);
   const[message,setMessage]=useState('');
+  const[errorMessage,setErrMessage]=useState('');
 
   useEffect(()=>{
     Axios.get("/api/login").then((response)=>{
@@ -47,6 +48,8 @@ const Homemyposts = ({children}) => {
           }else{
             setMessage("")
           }
+        }).catch((error)=> {
+          setErrMessage("Error encountered on the server.");
         });
             
         }     
@@ -60,7 +63,7 @@ const Homemyposts = ({children}) => {
   return (
     <div>
       <Navigation user={loggedInUser} loggedIn={isLoggedIn} page/>
-      <Gallery loaded={load} image={sentImage} loggedIn={isLoggedIn} message = {message}page={1}/>
+      <Gallery loaded={load} image={sentImage} loggedIn={isLoggedIn} message = {message} error={errorMessage}page={1}/>
       <Add />
       <Drawer />
     </div>
