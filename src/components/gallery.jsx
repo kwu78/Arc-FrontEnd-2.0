@@ -43,6 +43,7 @@ export function Gallery(props) {
   const [ load, setLoading ] = useState(false);
 
   const[displayimage, setDisplayimage] = useState([]);
+  const[message,setMessage]=useState('');
 
   function clickMe(event, entry){
     // event.preventDefault();   
@@ -110,7 +111,9 @@ export function Gallery(props) {
               
             </div> 
             {props.page?
-            <div></div>:               
+            <div>
+            <p>  {props.message} </p>
+            </div>:               
             <div 
                 style={{
                   display: "flex",
@@ -150,6 +153,7 @@ export function Gallery(props) {
             </div>
           </div>
         </div>
+
         <Comment show={commentState} onShow={() => setCommentState(true)}
           onHide={() => setCommentState(false) } entry={sentEntry} />
 
@@ -160,7 +164,6 @@ export function Gallery(props) {
     console.log("this case");
     return (
       <ReactLoading/>
-
     )
   }
 }

@@ -21,6 +21,8 @@ const Homemycomments = ({children}) => {
   const [loggedInUser,setLoggedInUser]=useState('');
   const [loggedInUserID,setLoggedInUserID]=useState('');
   const [ load, setLoading ] = useState(true);
+  const[message,setMessage]=useState('');
+
   useEffect(()=>{
     Axios.get("/api/login").then((response)=>{
       if(response.data.loggedIn===true){
@@ -40,10 +42,13 @@ const Homemycomments = ({children}) => {
           };
           setSentImage(response.data['user commented posts']);
           setLoading(false);
-     
+          if (response.data['user commented posts'] == 0){
+            setMessage("Start the journey by making your first comment! :) ")
+          }else{
+            setMessage("")
+          } 
         }); 
         }     
-      
     });
     
    
@@ -53,7 +58,7 @@ const Homemycomments = ({children}) => {
   return (
     <div>
       <Navigation user={loggedInUser} loggedIn={isLoggedIn} page/>
-      <Gallery loaded={load} image={sentImage} loggedIn={isLoggedIn} page={2}/>
+      <Gallery loaded={load} image={sentImage} message = {message} loggedIn={isLoggedIn} page={2}/>
       <Add />
       <Drawer />
     </div>

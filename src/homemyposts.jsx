@@ -21,6 +21,8 @@ const Homemyposts = ({children}) => {
   const [loggedInUser,setLoggedInUser]=useState('');
   const [loggedInUserID,setLoggedInUserID]=useState('');
   const [ load, setLoading ] = useState(true);
+  const[message,setMessage]=useState('');
+
   useEffect(()=>{
     Axios.get("/api/login").then((response)=>{
       if(response.data.loggedIn===true){
@@ -40,8 +42,13 @@ const Homemyposts = ({children}) => {
           };
           setSentImage(response.data['user posts search']);
           setLoading(false);
-     
-        });               
+          if (response.data['user posts search'] == 0){
+            setMessage("Start the journey by sharing your first post! :) ")
+          }else{
+            setMessage("")
+          }
+        });
+            
         }     
       
     });
@@ -53,7 +60,7 @@ const Homemyposts = ({children}) => {
   return (
     <div>
       <Navigation user={loggedInUser} loggedIn={isLoggedIn} page/>
-      <Gallery loaded={load} image={sentImage} loggedIn={isLoggedIn} page={1}/>
+      <Gallery loaded={load} image={sentImage} loggedIn={isLoggedIn} message = {message}page={1}/>
       <Add />
       <Drawer />
     </div>
