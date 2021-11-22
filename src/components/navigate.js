@@ -55,7 +55,7 @@ function search(){
         } 
                
       </Nav>
-      {props.myposts?
+      {props.page?
       <Form className="search-all d-flex"></Form>
     :
     <Form className="search-all d-flex">

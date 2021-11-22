@@ -61,7 +61,7 @@ function setImage(e){
   return (
     <div>
       <Navigation setImage={setImage} user={loggedInUser} loggedIn={isLoggedIn}/>
-      <Gallery loaded={load} image={sentImage} loggedIn={isLoggedIn}/>
+      <Gallery loaded={load} image={sentImage} loggedIn={isLoggedIn} page={0}/>
       <Add />
       <Drawer />
     </div>

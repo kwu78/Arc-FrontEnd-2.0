@@ -10,6 +10,7 @@ import {useHistory} from "react-router-dom";
 import ReactLoading from 'react-loading';
 import {Loader} from 'semantic-ui-react';
 
+
 const ButtonS = styled.button`
 font-size: 15;
 background:none;
@@ -99,16 +100,14 @@ export function Gallery(props) {
               <br></br>
               <br></br>
               <br></br>
-              {props.myposts?
-              <p>
-            This is your art space
-          </p>
-          :
-              <p>
-                To help an artist gather and give genuine critique anonymously from other artists<br></br>in order to replenish creativity and create better art
-              </p>}
+              {(props.page==1&&<p>This is your art space</p>)
+          
+              ||(props.page==0&&<p>To help an artist gather and give genuine critique anonymously from other artists<br></br>in order to replenish creativity and create better art
+              </p> )
+              ||(props.page==2&&<p>This is what you critiqued</p>)}
+              
             </div> 
-            {props.myposts?
+            {props.page?
             <div></div>:               
             <div 
                 style={{
