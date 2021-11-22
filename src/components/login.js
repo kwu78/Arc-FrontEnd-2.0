@@ -139,10 +139,15 @@ async function Googlelogin(event){
   </Form.Group>
 
   <Form.Group style={{textAlign:'center'}} className="mb-3">
-  <Button onClick={Googlelogin} className="loginbut" variant='light' size="lg" style={{textAlign:"left",padding:0,minWidth:'100%',position:'static'}}>
-    <img style={{height:'25px',width:"25px",marginRight:"24%",position:"relative"}} src={GoogleLogo}></img>
+  <div style={{minWidth:'100%',display:'inline'}}>
+  <Button onClick={Googlelogin} className="loginbut" variant='light' size="lg" style={{fontSize:"1.5rem",minWidth:'100%',padding:0,position:'static'}}>
+  <div style={{display:'inline'}}>
+    <img style={{height:'25px',width:"25px",float:"left",display:"inline"}} src={GoogleLogo}></img>
     <span className="buttonText">Sign in with Google</span>
+    </div>
+    {/* Sign in with Google */}
   </Button>
+  </div>
 
   <div style={{textAlign:'center',minWidth:'100%'}}>
   <Button  onClick={login} style={{fontSize:"1.5rem",minWidth:'100%'}} id="test" className="loginbut" variant="primary" type="submit" size="lg">

@@ -220,8 +220,10 @@ console.log('loading more');
               ||(props.page==2&&<p>This is what you critiqued</p>)}
               
             </div> 
-      <p>  {"We ran out of images for you"} </p>
+      {/* <p>  {"We ran out of images for you"} </p> */}
+      <center>
       <ReactLoading/>
+      </center>
       </div>
       </div>
 
