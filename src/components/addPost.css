@@ -33,16 +33,51 @@
   border-bottom: 1px;
 }
 #photoID{
-  border-radius: 0;
   border: none;
-  border-width: 1.3px;
-  border-bottom: 1px;
+  label: "ADD A TITLE";
+  resize: none;
+  white-space: nowrap;
+  overflow-x: scroll;
+  font-family: Helvetica, sans-serif;
+  height: 100px;
+  width:360px;
+  border-bottom: 2px solid black;
+  padding-bottom: 10px;
 }
+#description{
+  resize: horizontal;
+  overflow-x: scroll;
+  font-family: Helvetica, sans-serif;
+  resize: none;
+  height: 100px;
+  width: 360px;
+  border-bottom: 2px solid black;
+  padding-bottom: 5px;
+}
+
+
+
+::placeholder{
+  color: black;
+  font-size: 2em;
+  text-align: left;
+  padding-top:70px;
+}
+
+h4{
+  padding-top: 10px;
+}
+
+#uploadposition{
+  align-self: center;
+}
+
+
 .filepond--root {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
         Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol';
-    height: 15em;
+    height: 40em;
 }
 /* use a hand cursor intead of arrow for the action buttons */
 .filepond--file-action-button {

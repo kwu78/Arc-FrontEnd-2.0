@@ -11,7 +11,8 @@ import 'filepond/dist/filepond.min.css'
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
-import { toppings } from "./toppings";
+import Grid from '@mui/material/Grid';
+
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
 function AddPost(props){
@@ -73,8 +74,7 @@ function AddPost(props){
       description:document.getElementById('description').value,
       artType:artType,
       photoURL:photoURL,
-      userinfo:loggedInUser._id,
-      critique: cri,
+      userinfo:loggedInUser._id
     }
 
     console.log(post);
@@ -91,26 +91,15 @@ function AddPost(props){
     animation={false}
     centered
   >
-  <Container>
-    <Row>
-      <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter" >
-            Add A New Post
-          </Modal.Title>
-        </Modal.Header>
-    </Row>
-    <Row>
-      <Col>
-            <h4>Upload Your Art Here</h4>
-      </Col>
-      <Col>
-      <FloatingLabel  controlId="floatingTextarea" label="Title" className="mb-3">
-        <Form.Control id='photoID' as="textarea" placeholder="Leave a comment here"/>
-      </FloatingLabel>
-      </Col>
-    </Row>
-    <Row>
-      <Col>
+
+  <Modal.Header >
+      <Modal.Title id="contained-modal-title-vcenter" >
+        Add A New Post
+      </Modal.Title>
+    </Modal.Header>
+  <Grid container spacing = {5}>
+    <Grid item xs = {6}>
+      <h4>Upload Your Art Here</h4>
       <Form.Group>
       <FilePond
           className = "filepond--item"
@@ -123,20 +112,22 @@ function AddPost(props){
           labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
         />
       </Form.Group>
-      </Col>
-      <Col>
-        <FloatingLabel controlId="floatingTextarea2" label="Description" id= "descrptionbox">
-          <Form.Control
-            id='description'
-            as="textarea"
-            placeholder="Leave a comment here"
-            style={{ height: '100px' }}
-          />
-        </FloatingLabel>
-      </Col>
-  </Row>
-  <Row>
-      <Col md = {{offset:6}}>
+
+    </Grid>
+
+    <Grid item xs = {6}>
+
+      <textarea id = 'photoID' placeholder = "Add A Title">
+
+      </textarea>
+
+      <textarea id = 'description' placeholder = "Tell us about your work">
+
+      </textarea>
+
+
+        <h4> Type </h4>
+
         <ButtonGroup className="mb-2">
         {type.map((choice) => (
           <ToggleButton
@@ -153,40 +144,14 @@ function AddPost(props){
           </ToggleButton>
             ))}
         </ButtonGroup>
-      </Col>
-    </Row>
-    <Row>
-      <Col md = {{offset:6}}>
 
-        <h4> Area to Critique </h4>
-        <ButtonGroup className="mb-2">
-        {cri.map((option)=>(
-        <ToggleButton
-          key={option.id}
-          id={`checkbox-${option.id}`}
-          type="checkbox"
-          variant="outline-secondary"
-          name="critique"
-          checked={critique === option.value}
-          value={option.value}
-          onChange={(e) => setCritique(e.currentTarget.value)}
-        >
-          {option.value}
-        </ToggleButton>
-        ))}
-        </ButtonGroup>
+    </Grid>
+  </Grid>
 
-    </Col>
-    </Row>
-    <Row>
-      <Col md = {{ offset:0}}>
-        <Button onClick={props.onHide} type = 'button' variant = "secondary">Close</Button>
-      </Col>
-      <Col md = {{span:1, offset:10}}>
-        <Button onClick={upload} type='submit' variant = "secondary">Upload</Button>
-      </Col>
-    </Row>
-  </Container>
+  <Modal.Footer>
+          <Button onClick={props.onHide} type = 'button' variant = "secondary">Close</Button>
+         <Button onClick={upload} type='submit' variant = "secondary">Upload</Button>
+  </Modal.Footer>
   </Modal>);
 }
 export default AddPost;
