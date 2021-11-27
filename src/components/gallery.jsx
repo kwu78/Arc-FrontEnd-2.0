@@ -45,7 +45,7 @@ export function Gallery(props) {
   const [active, setActive] = useState('All');
   const [ load, setLoading ] = useState(false);
   const[index,setIndex]=useState(0);
-
+console.log(props.iamge);
   function loadMore(){
     setLoading(true);
 console.log('loading more');
@@ -88,28 +88,37 @@ console.log('loading more');
     setDisplayimage(props.image);
     setdimage(displayimage.slice(0,index+2));
     setLoading(false);
-  },[props.image,displayimage]
+  },[props.image]
   );
 
   function filter(e, type){
+    setdimage([]);
+    setDisplayimage([]);
     setLoading(true);
+    setIndex(2);
     setActive(type);
     console.log(type)
     if (type == 'All'){
-      Axios.post("posts/all",3).then((response)=>{
-        setDisplayimage(response.data);
-        setdimage(displayimage.slice(0,index+2));
-        setLoading(false);
-      }).catch((error)=> {
-        setErrMessage("Error encountered on the server.");
-      });
+      // Axios.post("posts/all",3).then((response)=>{
+      //   setDisplayimage(response.data);
+      //   setdimage(displayimage.slice(0,index+2));
+      //   setLoading(false);
+      // }).catch((error)=> {
+      //   setErrMessage("Error encountered on the server.");
+      // });
+      setDisplayimage(props.image);
+      
+      setdimage(displayimage.slice(0,index+2));
+      setLoading(false);
+
     }
     if (type == 'Artwork'){
       Axios.get('/posts/type?type=artwork')
       .then(function (response) {
         setDisplayimage(response.data['type search']);
-      
-        setdimage(displayimage.slice(0,index+2));
+        console.log(response.data['type search']);
+        if(displayimage.length>0){
+        setdimage(response.data['type search'].slice(0,index+2));}
       
         setLoading(false);
       }).catch((error)=> {
@@ -121,7 +130,8 @@ console.log('loading more');
       .then(function (response) {
         setDisplayimage(response.data['type search']);
         console.log(response.data['type search']);
-        setdimage(displayimage.slice(0,index+2));
+       
+        setdimage(response.data['type search'].slice(0,index+2));
         console.log(dimage);
         setLoading(false);
       }).catch((error)=> {
