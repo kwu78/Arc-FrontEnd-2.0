@@ -46,16 +46,18 @@ export function Gallery(props) {
   const [ load, setLoading ] = useState(false);
   const[index,setIndex]=useState(0);
 console.log(props.iamge);
+
   function loadMore(){
     setLoading(true);
 console.log('loading more');
-    setIndex(index+4);
+    setIndex(index+10);
     setdimage(displayimage.slice(0,index+4));
     console.log(index);
     console.log(dimage);
     setIsFetching(false)
     setLoading(false);
   }
+
   const [isFetching, setIsFetching] = useState(false);
   const [dimage,setdimage]=useState([]);
   const[displayimage, setDisplayimage] = useState([]);
@@ -86,7 +88,8 @@ console.log('loading more');
   useEffect(()=>{
     setLoading(true);
     setDisplayimage(props.image);
-    setdimage(displayimage.slice(0,index+2));
+    setIndex(10);
+    setdimage(displayimage.slice(0,index));
     setLoading(false);
   },[props.image]
   );
@@ -95,7 +98,7 @@ console.log('loading more');
     setdimage([]);
     setDisplayimage([]);
     setLoading(true);
-    setIndex(2);
+    setIndex(10);
     setActive(type);
     console.log(type)
     if (type == 'All'){
@@ -107,8 +110,8 @@ console.log('loading more');
       //   setErrMessage("Error encountered on the server.");
       // });
       setDisplayimage(props.image);
-      
-      setdimage(displayimage.slice(0,index+2));
+      setIndex(10);
+      setdimage(displayimage.slice(0,index));
       setLoading(false);
 
     }
@@ -118,7 +121,8 @@ console.log('loading more');
         setDisplayimage(response.data['type search']);
         console.log(response.data['type search']);
         if(displayimage.length>0){
-        setdimage(response.data['type search'].slice(0,index+2));}
+
+        setdimage(response.data['type search'].slice(0,index));}
       
         setLoading(false);
       }).catch((error)=> {
@@ -130,8 +134,7 @@ console.log('loading more');
       .then(function (response) {
         setDisplayimage(response.data['type search']);
         console.log(response.data['type search']);
-       
-        setdimage(response.data['type search'].slice(0,index+2));
+        setdimage(response.data['type search'].slice(0,index));
         console.log(dimage);
         setLoading(false);
       }).catch((error)=> {
