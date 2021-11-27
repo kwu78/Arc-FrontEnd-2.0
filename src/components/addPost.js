@@ -75,7 +75,8 @@ function AddPost(props){
       }); 
       setErrMessage('');
       props.onHide();
-      history.push("/");
+      // history.push("/");
+      window.location.reload();
     } else{
       setErrMessage("Please upload an image");
     }
