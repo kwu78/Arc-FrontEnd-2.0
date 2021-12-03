@@ -44,7 +44,7 @@ export function Gallery(props) {
   const[sentEntry,setSentEntry]=useState([]);
   const [active, setActive] = useState('All');
   const [ load, setLoading ] = useState(false);
-  const[index,setIndex]=useState(0);
+  const[index,setIndex]=useState(10);
 console.log(props.iamge);
 
   function loadMore(){
@@ -88,8 +88,9 @@ console.log('loading more');
   useEffect(()=>{
     setLoading(true);
     setDisplayimage(props.image);
-    setIndex(10);
-    setdimage(displayimage.slice(0,index));
+    console.log(props.image);
+    setdimage(props.image.slice(0,index));
+    console.log(dimage);
     setLoading(false);
   },[props.image]
   );
@@ -143,7 +144,7 @@ console.log('loading more');
     }
   }
 
-  if (dimage.length>0) {
+  if (dimage) {
     console.log(dimage);
     return (
       <div>
@@ -163,7 +164,7 @@ console.log('loading more');
               ||(props.page==2&&<p>This is what you critiqued</p>)}
               
             </div> 
-            <p>  {errorMessage} </p>
+            <h1 style={{color: "red"}}> {errorMessage} </h1>
 
             {props.page?
             <div>
@@ -205,7 +206,11 @@ console.log('loading more');
                   }
                 
                 </ImageList>
-                {dimage.length<displayimage.length?<Button onClick={loadMore} size="lg" variant="light">Load More</Button>:<p>You have loaded all the images.</p>}
+                <center>
+                <div style={{width:"33%"}} className="d-grid gap-2">
+                {dimage.length<displayimage.length?<Button onClick={loadMore} size="lg" variant="outline-light">Load More</Button>:<p>You have loaded all the images.</p>}
+                </div>
+                </center>
                 </div>
                 :<center style={{marginTop:"7%"}}><ReactLoading/></center>}
             </div>
@@ -238,7 +243,7 @@ console.log('loading more');
               ||(props.page==2&&<p>This is what you critiqued</p>)}
               
             </div> 
-      {/* <p>  {"We ran out of images for you"} </p> */}
+            <h1 style={{color: "red"}}> {errorMessage} </h1>
       <center>
       <ReactLoading/>
       </center>
